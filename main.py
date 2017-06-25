@@ -15,16 +15,13 @@ class UberWrapper(object):
 
 
 
-Uber = UberWrapper()
-print Uber.address_lookup(47.575243199999996, -122.12976889999999)
 
+if __name__ == '__main__':
+    msft_seattle = '320 Westlake Ave N, Seattle, WA 98109'
+    msft_bellevue = '205 108th Ave NE, Bellevue, WA 98004'
+    msft_redmond = '15010 Northeast 36th Street, Redmond, WA 98052'
 
+    Uber = UberWrapper()
+    print Uber.address_lookup(47.575243199999996, -122.12976889999999)
 
-#
-# lat = str(47.575243199999996)
-# lng = str(-122.12976889999999)
-#
-# req = UBER_address_lookup + lat + "&lng=" + lng
-#
-# res = requests.get(req)
-# print res.json()
+    
