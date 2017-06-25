@@ -1,19 +1,22 @@
 import requests
 import json
 
-class AddressLookup(object):
-    """docstring for AddressLookup."""
+class UberWrapper(object):
+    """
+    Wrapper for address-lookup api endpoint
+    """
     def __init__(self):
-        self.url = "https://www.uber.com/api/address-lookup?lat="
+        self.url_AL = "https://www.uber.com/api/address-lookup?lat="
 
-
-    def get(self, lat, lng):
-        req = requests.get(self.url + str(lat) + "&lng=" + str(lng))
+    def address_lookup(self, lat, lng):
+        req = requests.get(self.url_AL + str(lat) + "&lng=" + str(lng))
         return req.json()
 
 
-al = AddressLookup()
-print al.get(47.575243199999996, -122.12976889999999)
+
+
+Uber = UberWrapper()
+print Uber.address_lookup(47.575243199999996, -122.12976889999999)
 
 
 
