@@ -23,7 +23,17 @@ def get_address_from_reverse_geocode(blob):
     address = blob[0]['formatted_address']
     return address
 
-def drawMap():
+def get_address_from_placeID(blob):
+    address = blob['result']['formatted_address']
+    return address
+
+def get_placeID_from_latlng(blob):
+    place_id = blob[0]['place_id']
+    return place_id
+
+
+
+def drawMap(lats, lngs):
     gmap = gmplot.GoogleMapPlotter(params.centroid[0], params.centroid[1], 14)
 
     # gmap.scatter(more_lats, more_lngs, '#3B0B39', size=40, marker=False)
@@ -39,11 +49,28 @@ class UberWrapper(object):
     """
     def __init__(self):
         self.url_AL = "https://www.uber.com/api/address-lookup?lat="
+        self.url_FE = "https://www.uber.com/api/fare-estimate?"
 
     def address_lookup(self, lat, lng):
         req = requests.get(self.url_AL + str(lat) + "&lng=" + str(lng))
         return req.json()
 
+    def fare_estimator(self, pickupID, destID):
+        fares = []
+        req = self.url_FE + 'pickupRef=' + pickupID + '&destinationRef=' + destID
+        req = requests.get(req)
+        return req.json()
+
+    def get_UberX_from_fares(blob):
+        """        prices [
+            {
+                fare string
+                type
+            }
+        ]
+        """
+        fare = blob['prices']
+        print fare
 
 
 
@@ -52,6 +79,7 @@ if __name__ == '__main__':
 
     # address locations of Microsoft offices in Puget Sound
     msft_seattle = '320 Westlake Ave N, Seattle, WA 98109'
+    molly_moons = '917 E Pine St, Seattle, WA 98122'
     msft_bellevue = '205 108th Ave NE, Bellevue, WA 98004'
     msft_redmond = '15010 Northeast 36th Street, Redmond, WA 98052'
     larkspur = '15805 SE 37th St, Bellevue, WA 98006'
@@ -63,11 +91,13 @@ if __name__ == '__main__':
     gmaps = googlemaps.Client(key=APIKEY)
 
     geocode_result = gmaps.geocode(msft_seattle)
-    latlng = get_lat_lng_from_geocode(geocode_result)
-    print latlng
+    latlng = tuple(params.seattle) # get_lat_lng_from_geocode(geocode_result)
 
+    # Get place ID of origin
     reverse_geocode_result = gmaps.reverse_geocode(latlng)
     address = get_address_from_reverse_geocode(reverse_geocode_result)
+    origin_placeID = get_placeID_from_latlng(reverse_geocode_result)
+
 
     # nearby_result = gmaps.places_radar(latlng, 1000, keyword='food')
     # nearby_result = nearby_result['results']
@@ -83,6 +113,14 @@ if __name__ == '__main__':
 
 
     hexgrid = generate_hexgrid(params.centroid, params.shells, params.major)
+    for centroid in hexgrid:
+        reverse_geocode_result = gmaps.reverse_geocode(centroid)
+        dest_placeID = get_placeID_from_latlng(reverse_geocode_result)
+        fares_response = Uber.fare_estimator(origin_placeID, dest_placeID)
+        print Uber.get_UberX_from_fares(fares_response)
+        exit()
+
+
     print len(hexgrid)
     lats = []
     lngs = []
@@ -90,5 +128,4 @@ if __name__ == '__main__':
         lats.append(pair[0])
         lngs.append(pair[1])
 
-
-    drawMap()
+    drawMap(lats, lngs)
