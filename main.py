@@ -2,6 +2,7 @@ import requests
 import json
 import googlemaps
 import gmplot
+import time
 from hexmath import generate_hexgrid
 import params
 from datetime import datetime
@@ -61,7 +62,7 @@ class UberWrapper(object):
         req = requests.get(req)
         return req.json()
 
-    def get_UberX_from_fares(blob):
+    def get_UberX_from_fares(self, blob):
         """        prices [
             {
                 fare string
@@ -69,8 +70,14 @@ class UberWrapper(object):
             }
         ]
         """
-        fare = blob['prices']
-        print fare
+        fares = blob['prices']
+        # UberX_fare = ''
+        for vehicle in fares:
+            if vehicle['vehicleViewDisplayName'] == 'uberX':
+                return vehicle['fareString']
+
+        return 'PRICE NOT FOUND'
+
 
 
 
@@ -113,15 +120,18 @@ if __name__ == '__main__':
 
 
     hexgrid = generate_hexgrid(params.centroid, params.shells, params.major)
-    for centroid in hexgrid:
+    print len(hexgrid)
+    for centroid in hexgrid[::9]:
+
         reverse_geocode_result = gmaps.reverse_geocode(centroid)
         dest_placeID = get_placeID_from_latlng(reverse_geocode_result)
+
         fares_response = Uber.fare_estimator(origin_placeID, dest_placeID)
         print Uber.get_UberX_from_fares(fares_response)
-        exit()
+
+        time.sleep(0.5)
 
 
-    print len(hexgrid)
     lats = []
     lngs = []
     for pair in hexgrid:
