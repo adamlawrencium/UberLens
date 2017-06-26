@@ -1,5 +1,26 @@
 import requests
 import json
+import googlemaps
+from datetime import datetime
+
+
+
+def readAPI_key():
+    with open('APIKEYS.txt', 'r') as myfile:
+        data = myfile.read().replace('\n', '')
+        return data
+
+
+
+def get_lat_lng_from_geocode(blob):
+    pair = blob[0]['geometry']['location']
+    return pair['lat'], pair['lng']
+
+def get_address_from_reverse_geocode(blob):
+    address = blob[0]['formatted_address']
+    return address
+
+
 
 class UberWrapper(object):
     """
@@ -16,27 +37,48 @@ class UberWrapper(object):
 
 
 
+
+
 if __name__ == '__main__':
+
+    # address locations of Microsoft offices in Puget Sound
     msft_seattle = '320 Westlake Ave N, Seattle, WA 98109'
     msft_bellevue = '205 108th Ave NE, Bellevue, WA 98004'
     msft_redmond = '15010 Northeast 36th Street, Redmond, WA 98052'
 
+    # # # # #
     Uber = UberWrapper()
-    print Uber.address_lookup(47.575243199999996, -122.12976889999999)
+    APIKEY = readAPI_key()
+    gmaps = googlemaps.Client(key=APIKEY)
 
-    from googleplaces import GooglePlaces, types, lang
+    geocode_result = gmaps.geocode(msft_bellevue)
+    latlng = get_lat_lng_from_geocode(geocode_result)
 
-    YOUR_API_KEY = 'AIzaSyAiFpFd85eMtfbvmVNEYuNds5TEF9FjIPI'
+    reverse_geocode_result = gmaps.reverse_geocode(latlng)
+    address = get_address_from_reverse_geocode(reverse_geocode_result)
 
-    google_places = GooglePlaces(YOUR_API_KEY)
+    nearby_result = gmaps.places_radar(latlng, 5000, keyword='address')
+    nearby_result = nearby_result['results']
+    for r in nearby_result:
+        pair = r['geometry']['location']['lat'], r['geometry']['location']['lng']
+        print 'Gmaps:\t', get_address_from_reverse_geocode(gmaps.reverse_geocode(pair))
+        print 'Uber:\t', (Uber.address_lookup(pair[0], pair[1]))['longAddress']
+        print
 
-    # You may prefer to use the text_search API, instead.
-    query_result = google_places.nearby_search(
-            location='London, England', keyword='Fish and Chips',
-            radius=20000, types=[types.TYPE_FOOD])
-    # If types param contains only 1 item the request to Google Places API
-    # will be send as type param to fullfil:
-    # http://googlegeodevelopers.blogspot.com.au/2016/02/changes-and-quality-improvements-in_16.html
 
-    if query_result.has_attributions:
-        print query_result.html_attributions
+    # # # # #
+
+    # Uber tests
+
+    # print Uber.address_lookup(47.575243199999996, -122.12976889999999)
+    # print
+
+
+    # nearby_result = gmaps.places_radar()
+    # def places_radar(location, radius, keyword=None, min_price=None,
+    #              max_price=None, name=None, open_now=False, type=None):
+    #
+    # geocode_result = gmaps.places_radar('1600 Amphitheatre Parkway, Mountain View, CA')
+    # print geocode_result
+    # # Look up an address with reverse geocoding
+    # reverse_geocode_result = gmaps.reverse_geocode((40.714224, -73.961452))
