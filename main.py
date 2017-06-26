@@ -97,8 +97,8 @@ if __name__ == '__main__':
     APIKEY = readAPI_key()
     gmaps = googlemaps.Client(key=APIKEY)
 
-    geocode_result = gmaps.geocode(msft_seattle)
-    latlng = tuple(params.seattle) # get_lat_lng_from_geocode(geocode_result)
+    geocode_result = gmaps.geocode(msft_bellevue)
+    latlng = tuple(params.centroid) # get_lat_lng_from_geocode(geocode_result)
 
     # Get place ID of origin
     reverse_geocode_result = gmaps.reverse_geocode(latlng)
@@ -121,7 +121,7 @@ if __name__ == '__main__':
 
     hexgrid = generate_hexgrid(params.centroid, params.shells, params.major)
     print len(hexgrid)
-    for centroid in hexgrid[::9]:
+    for centroid in hexgrid[::18]:
 
         reverse_geocode_result = gmaps.reverse_geocode(centroid)
         dest_placeID = get_placeID_from_latlng(reverse_geocode_result)
