@@ -37,8 +37,6 @@ class UberWrapper(object):
 
 
 
-
-
 if __name__ == '__main__':
 
     # address locations of Microsoft offices in Puget Sound
@@ -64,21 +62,3 @@ if __name__ == '__main__':
         print 'Gmaps:\t', get_address_from_reverse_geocode(gmaps.reverse_geocode(pair))
         print 'Uber:\t', (Uber.address_lookup(pair[0], pair[1]))['longAddress']
         print
-
-
-    # # # # #
-
-    # Uber tests
-
-    # print Uber.address_lookup(47.575243199999996, -122.12976889999999)
-    # print
-
-
-    # nearby_result = gmaps.places_radar()
-    # def places_radar(location, radius, keyword=None, min_price=None,
-    #              max_price=None, name=None, open_now=False, type=None):
-    #
-    # geocode_result = gmaps.places_radar('1600 Amphitheatre Parkway, Mountain View, CA')
-    # print geocode_result
-    # # Look up an address with reverse geocoding
-    # reverse_geocode_result = gmaps.reverse_geocode((40.714224, -73.961452))
