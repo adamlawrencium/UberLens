@@ -34,12 +34,18 @@ def get_placeID_from_latlng(blob):
 
 
 
-def drawMap(lats, lngs):
+def drawMap(pairs):
     gmap = gmplot.GoogleMapPlotter(params.centroid[0], params.centroid[1], 14)
 
-    # gmap.scatter(more_lats, more_lngs, '#3B0B39', size=40, marker=False)
-    gmap.scatter(lats, lngs, 'k', marker=True)
-    # gmap.heatmap(heat_lats, heat_lngs)
+    gmap.scatter(pairs['low'][1], pairs['low'][2], 'forestgreen', marker=True)
+    gmap.scatter(pairs['medium'][1], pairs['medium'][2], 'yellow', marker=True)
+    gmap.scatter(pairs['high'][1], pairs['high'][2], 'red', marker=True)
+    # # gmap.scatter(more_lats, more_lngs, '#3B0B39', size=40, marker=False)
+    # gmap.scatter(lats, lngs, 'k', marker=False)
+    #
+    # gmap.scatter(lats, lngs, 'azure', size=400, marker=True)
+    # # gmap.scatter(lats, lngs, 'k', marker=True)
+    # # gmap.heatmap(lats, lngs)
 
     gmap.draw("mymap.html")
 
@@ -106,36 +112,57 @@ if __name__ == '__main__':
     origin_placeID = get_placeID_from_latlng(reverse_geocode_result)
 
 
-    # nearby_result = gmaps.places_radar(latlng, 1000, keyword='food')
-    # nearby_result = nearby_result['results']
-    # lats = []
-    # lngs = []
-    # for r in nearby_result:
-    #     pair = r['geometry']['location']['lat'], r['geometry']['location']['lng']
-    #     print 'Gmaps:\t', get_address_from_reverse_geocode(gmaps.reverse_geocode(pair))
-    #     print 'Uber:\t', (Uber.address_lookup(pair[0], pair[1]))['longAddress']
-    #     print
-    #     lats.append(pair[0])
-    #     lngs.append(pair[1])
-
+    pairs = {}
+    pairs['low'] = [],[],[]
+    pairs['medium'] = [],[],[]
+    pairs['high'] = [],[],[]
 
     hexgrid = generate_hexgrid(params.centroid, params.shells, params.major)
     print len(hexgrid)
-    for centroid in hexgrid[::18]:
 
+    fares = []
+    for centroid in hexgrid:
         reverse_geocode_result = gmaps.reverse_geocode(centroid)
         dest_placeID = get_placeID_from_latlng(reverse_geocode_result)
 
         fares_response = Uber.fare_estimator(origin_placeID, dest_placeID)
-        print Uber.get_UberX_from_fares(fares_response)
+        print fares_response
+        if 'estimatesHasError' in fares_response.keys():
+            print 'ERROR, TRYING AGAIN'
+            fares_response = Uber.fare_estimator(origin_placeID, dest_placeID)
+            print fares_response
 
-        time.sleep(0.5)
+        fare_string = Uber.get_UberX_from_fares(fares_response)
 
+        fare_range = [ float(x) for x in fare_string[1:].split('-') ]
+        fare = sum(fare_range) / len(fare_range)
+        fares.append(fare)
 
-    lats = []
-    lngs = []
-    for pair in hexgrid:
-        lats.append(pair[0])
-        lngs.append(pair[1])
+        print fare
 
-    drawMap(lats, lngs)
+        # time.sleep(0.25)
+
+    for i in range(len(fares)):
+        if fares[i] == min(fares):
+            print 'low found', fares[i]
+            pairs['low'][0].append(fares[i])
+            pairs['low'][1].append(hexgrid[i][0])
+            pairs['low'][2].append(hexgrid[i][1])
+        elif fares[i] == max(fares):
+            print 'high found', fares[i]
+            pairs['high'][0].append(fares[i])
+            pairs['high'][1].append(hexgrid[i][0])
+            pairs['high'][2].append(hexgrid[i][1])
+        else:
+            print 'medium found', fares[i]
+            pairs['medium'][0].append(fares[i])
+            pairs['medium'][1].append(hexgrid[i][0])
+            pairs['medium'][2].append(hexgrid[i][1])
+
+    # lats = []
+    # lngs = []
+    # for pair in hexgrid:
+    #     lats.append(pair[0])
+    #     lngs.append(pair[1])
+
+    drawMap(pairs)
