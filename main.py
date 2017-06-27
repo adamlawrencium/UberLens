@@ -92,6 +92,7 @@ if __name__ == '__main__':
 
     # address locations of Microsoft offices in Puget Sound
     msft_seattle = '320 Westlake Ave N, Seattle, WA 98109'
+    center_seattle = '832 16th Ave, Seattle, WA 98122'
     molly_moons = '917 E Pine St, Seattle, WA 98122'
     msft_bellevue = '205 108th Ave NE, Bellevue, WA 98004'
     msft_redmond = '15010 Northeast 36th Street, Redmond, WA 98052'
@@ -103,8 +104,8 @@ if __name__ == '__main__':
     APIKEY = readAPI_key()
     gmaps = googlemaps.Client(key=APIKEY)
 
-    geocode_result = gmaps.geocode(msft_bellevue)
-    latlng = tuple(params.centroid) # get_lat_lng_from_geocode(geocode_result)
+    geocode_result = gmaps.geocode(center_seattle)
+    latlng = get_lat_lng_from_geocode(geocode_result) #tuple(params.centroid) #
 
     # Get place ID of origin
     reverse_geocode_result = gmaps.reverse_geocode(latlng)
@@ -143,12 +144,12 @@ if __name__ == '__main__':
         # time.sleep(0.25)
 
     for i in range(len(fares)):
-        if fares[i] == min(fares):
+        if fares[i] < 7: #== min(fares):
             print 'low found', fares[i]
             pairs['low'][0].append(fares[i])
             pairs['low'][1].append(hexgrid[i][0])
             pairs['low'][2].append(hexgrid[i][1])
-        elif fares[i] == max(fares):
+        elif fares[i] > 12: #== max(fares):
             print 'high found', fares[i]
             pairs['high'][0].append(fares[i])
             pairs['high'][1].append(hexgrid[i][0])
