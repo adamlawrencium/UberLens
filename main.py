@@ -144,12 +144,12 @@ if __name__ == '__main__':
         # time.sleep(0.25)
 
     for i in range(len(fares)):
-        if fares[i] < 7: #== min(fares):
+        if fares[i] <= 7: #== min(fares):
             print 'low found', fares[i]
             pairs['low'][0].append(fares[i])
             pairs['low'][1].append(hexgrid[i][0])
             pairs['low'][2].append(hexgrid[i][1])
-        elif fares[i] > 12: #== max(fares):
+        elif fares[i] >= 9: #== max(fares):
             print 'high found', fares[i]
             pairs['high'][0].append(fares[i])
             pairs['high'][1].append(hexgrid[i][0])
