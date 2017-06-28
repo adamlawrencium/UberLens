@@ -115,8 +115,8 @@ if __name__ == '__main__':
     # # # # # USER INPUTS # # # # #
     origin_of_travel = larkspur
     destination = msft_bellevue
-    num_shells = 2
-    major = 140
+    num_shells = 10
+    major = 100
     # # # # # # # # # # # # # # # #
 
 
@@ -127,6 +127,9 @@ if __name__ == '__main__':
     # Get origin lat,lng and Google place ID (for Uber API)
     origin_latlng = GMaps.get_latlng_from_address(origin_of_travel)
     origin_placeID = GMaps.get_placeID_from_latlng(origin_latlng)
+
+    print "\nOrigin:\t\t", origin_of_travel
+    print "Destination:\t", destination
 
 
     # Basic data structure to store different levels of fares
@@ -139,11 +142,15 @@ if __name__ == '__main__':
     destination_latlng = GMaps.get_latlng_from_address(building_44)
     hexgrid = generate_hexgrid(list(destination_latlng), num_shells, major)
 
-    print len(hexgrid)
+    num_hexs = len(hexgrid)
+    print "\n%d points generated\n" % (num_hexs)
+    print "Estimating fares to every point in destination area..."
 
     fares = []
+    counter = 1
     for centroid in hexgrid:
 
+        # TODO: MULTITHREAD THIS?
         proximity_dest_placeID = GMaps.get_placeID_from_latlng(centroid)
         fares_response = Uber.fare_estimator(origin_placeID, proximity_dest_placeID)
         if 'estimatesHasError' in fares_response.keys():
@@ -156,8 +163,8 @@ if __name__ == '__main__':
         fare = sum(fare_range) / len(fare_range)
         fares.append(fare)
 
-        print fare
-
+        print "[%d/%d]:\t$%d" % (counter, num_hexs, fare)
+        counter += 1
         # time.sleep(0.25)
 
     for i in range(len(fares)):
@@ -180,7 +187,7 @@ if __name__ == '__main__':
     drawMap(pairs)
 
 
-    # # # # # # DRAWING MAP # # # # 
+    # # # # # # DRAWING MAP # # # #
     import matplotlib.pyplot as plt
     import numpy as np
 
