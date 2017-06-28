@@ -6,7 +6,7 @@
 <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?libraries=visualization&sensor=true_or_false"></script>
 <script type="text/javascript">
 	function initialize() {
-		var centerlatlng = new google.maps.LatLng(47.610117, -122.310822);
+		var centerlatlng = new google.maps.LatLng(47.641387, -122.132817);
 		var myOptions = {
 			zoom: 14,
 			center: centerlatlng,
@@ -14,1148 +14,376 @@
 		};
 		var map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
 
-		var latlng = new google.maps.LatLng(47.610117, -122.310822);
-		var img = new google.maps.MarkerImage('/usr/local/lib/python2.7/site-packages/gmplot/markers/228B22.png');
-		var marker = new google.maps.Marker({
-		title: "no implementation",
-		icon: img,
-		position: latlng
-		});
-		marker.setMap(map);
+var coords = [
+new google.maps.LatLng(47.642206, -122.130075),
+new google.maps.LatLng(47.642200, -122.130179),
+new google.maps.LatLng(47.642182, -122.130280),
+new google.maps.LatLng(47.642152, -122.130375),
+new google.maps.LatLng(47.642111, -122.130461),
+new google.maps.LatLng(47.642062, -122.130535),
+new google.maps.LatLng(47.642004, -122.130595),
+new google.maps.LatLng(47.641940, -122.130639),
+new google.maps.LatLng(47.641872, -122.130666),
+new google.maps.LatLng(47.641802, -122.130675),
+new google.maps.LatLng(47.641732, -122.130666),
+new google.maps.LatLng(47.641664, -122.130639),
+new google.maps.LatLng(47.641600, -122.130595),
+new google.maps.LatLng(47.641542, -122.130535),
+new google.maps.LatLng(47.641492, -122.130461),
+new google.maps.LatLng(47.641452, -122.130375),
+new google.maps.LatLng(47.641422, -122.130280),
+new google.maps.LatLng(47.641404, -122.130179),
+new google.maps.LatLng(47.641398, -122.130075),
+new google.maps.LatLng(47.641404, -122.129971),
+new google.maps.LatLng(47.641422, -122.129870),
+new google.maps.LatLng(47.641452, -122.129775),
+new google.maps.LatLng(47.641492, -122.129690),
+new google.maps.LatLng(47.641542, -122.129616),
+new google.maps.LatLng(47.641600, -122.129556),
+new google.maps.LatLng(47.641664, -122.129512),
+new google.maps.LatLng(47.641732, -122.129484),
+new google.maps.LatLng(47.641802, -122.129475),
+new google.maps.LatLng(47.641872, -122.129484),
+new google.maps.LatLng(47.641940, -122.129512),
+new google.maps.LatLng(47.642004, -122.129556),
+new google.maps.LatLng(47.642062, -122.129616),
+new google.maps.LatLng(47.642111, -122.129690),
+new google.maps.LatLng(47.642152, -122.129775),
+new google.maps.LatLng(47.642182, -122.129870),
+new google.maps.LatLng(47.642200, -122.129971),
+];
+
+var polygon = new google.maps.Polygon({
+clickable: false,
+geodesic: true,
+fillColor: "#228B22",
+fillOpacity: 0.300000,
+paths: coords,
+strokeColor: "#228B22",
+strokeOpacity: 1.000000,
+strokeWeight: 1
+});
+
+polygon.setMap(map);
+
+
+var coords = [
+new google.maps.LatLng(47.644092, -122.134926),
+new google.maps.LatLng(47.644086, -122.135030),
+new google.maps.LatLng(47.644068, -122.135131),
+new google.maps.LatLng(47.644038, -122.135226),
+new google.maps.LatLng(47.643998, -122.135312),
+new google.maps.LatLng(47.643948, -122.135386),
+new google.maps.LatLng(47.643890, -122.135446),
+new google.maps.LatLng(47.643826, -122.135490),
+new google.maps.LatLng(47.643758, -122.135517),
+new google.maps.LatLng(47.643688, -122.135526),
+new google.maps.LatLng(47.643618, -122.135517),
+new google.maps.LatLng(47.643550, -122.135490),
+new google.maps.LatLng(47.643486, -122.135446),
+new google.maps.LatLng(47.643428, -122.135386),
+new google.maps.LatLng(47.643378, -122.135312),
+new google.maps.LatLng(47.643338, -122.135226),
+new google.maps.LatLng(47.643308, -122.135131),
+new google.maps.LatLng(47.643290, -122.135030),
+new google.maps.LatLng(47.643284, -122.134926),
+new google.maps.LatLng(47.643290, -122.134822),
+new google.maps.LatLng(47.643308, -122.134721),
+new google.maps.LatLng(47.643338, -122.134626),
+new google.maps.LatLng(47.643378, -122.134541),
+new google.maps.LatLng(47.643428, -122.134467),
+new google.maps.LatLng(47.643486, -122.134407),
+new google.maps.LatLng(47.643550, -122.134362),
+new google.maps.LatLng(47.643618, -122.134335),
+new google.maps.LatLng(47.643688, -122.134326),
+new google.maps.LatLng(47.643758, -122.134335),
+new google.maps.LatLng(47.643826, -122.134362),
+new google.maps.LatLng(47.643890, -122.134407),
+new google.maps.LatLng(47.643948, -122.134467),
+new google.maps.LatLng(47.643998, -122.134541),
+new google.maps.LatLng(47.644038, -122.134626),
+new google.maps.LatLng(47.644068, -122.134721),
+new google.maps.LatLng(47.644086, -122.134822),
+];
+
+var polygon = new google.maps.Polygon({
+clickable: false,
+geodesic: true,
+fillColor: "#228B22",
+fillOpacity: 0.300000,
+paths: coords,
+strokeColor: "#228B22",
+strokeOpacity: 1.000000,
+strokeWeight: 1
+});
+
+polygon.setMap(map);
+
+
+var coords = [
+new google.maps.LatLng(47.640320, -122.134926),
+new google.maps.LatLng(47.640314, -122.135030),
+new google.maps.LatLng(47.640295, -122.135131),
+new google.maps.LatLng(47.640266, -122.135226),
+new google.maps.LatLng(47.640225, -122.135312),
+new google.maps.LatLng(47.640175, -122.135386),
+new google.maps.LatLng(47.640118, -122.135446),
+new google.maps.LatLng(47.640054, -122.135490),
+new google.maps.LatLng(47.639986, -122.135517),
+new google.maps.LatLng(47.639916, -122.135526),
+new google.maps.LatLng(47.639845, -122.135517),
+new google.maps.LatLng(47.639777, -122.135490),
+new google.maps.LatLng(47.639713, -122.135446),
+new google.maps.LatLng(47.639656, -122.135386),
+new google.maps.LatLng(47.639606, -122.135312),
+new google.maps.LatLng(47.639565, -122.135226),
+new google.maps.LatLng(47.639536, -122.135131),
+new google.maps.LatLng(47.639517, -122.135030),
+new google.maps.LatLng(47.639511, -122.134926),
+new google.maps.LatLng(47.639517, -122.134822),
+new google.maps.LatLng(47.639536, -122.134721),
+new google.maps.LatLng(47.639565, -122.134626),
+new google.maps.LatLng(47.639606, -122.134541),
+new google.maps.LatLng(47.639656, -122.134467),
+new google.maps.LatLng(47.639713, -122.134407),
+new google.maps.LatLng(47.639777, -122.134362),
+new google.maps.LatLng(47.639845, -122.134335),
+new google.maps.LatLng(47.639916, -122.134326),
+new google.maps.LatLng(47.639986, -122.134335),
+new google.maps.LatLng(47.640054, -122.134362),
+new google.maps.LatLng(47.640118, -122.134407),
+new google.maps.LatLng(47.640175, -122.134467),
+new google.maps.LatLng(47.640225, -122.134541),
+new google.maps.LatLng(47.640266, -122.134626),
+new google.maps.LatLng(47.640295, -122.134721),
+new google.maps.LatLng(47.640314, -122.134822),
+];
+
+var polygon = new google.maps.Polygon({
+clickable: false,
+geodesic: true,
+fillColor: "#228B22",
+fillOpacity: 0.300000,
+paths: coords,
+strokeColor: "#228B22",
+strokeOpacity: 1.000000,
+strokeWeight: 1
+});
+
+polygon.setMap(map);
+
+
+var coords = [
+new google.maps.LatLng(47.642206, -122.136543),
+new google.maps.LatLng(47.642200, -122.136647),
+new google.maps.LatLng(47.642182, -122.136748),
+new google.maps.LatLng(47.642152, -122.136843),
+new google.maps.LatLng(47.642111, -122.136929),
+new google.maps.LatLng(47.642062, -122.137003),
+new google.maps.LatLng(47.642004, -122.137063),
+new google.maps.LatLng(47.641940, -122.137107),
+new google.maps.LatLng(47.641872, -122.137134),
+new google.maps.LatLng(47.641802, -122.137143),
+new google.maps.LatLng(47.641732, -122.137134),
+new google.maps.LatLng(47.641664, -122.137107),
+new google.maps.LatLng(47.641600, -122.137063),
+new google.maps.LatLng(47.641542, -122.137003),
+new google.maps.LatLng(47.641492, -122.136929),
+new google.maps.LatLng(47.641452, -122.136843),
+new google.maps.LatLng(47.641422, -122.136748),
+new google.maps.LatLng(47.641404, -122.136647),
+new google.maps.LatLng(47.641398, -122.136543),
+new google.maps.LatLng(47.641404, -122.136439),
+new google.maps.LatLng(47.641422, -122.136338),
+new google.maps.LatLng(47.641452, -122.136243),
+new google.maps.LatLng(47.641492, -122.136158),
+new google.maps.LatLng(47.641542, -122.136084),
+new google.maps.LatLng(47.641600, -122.136024),
+new google.maps.LatLng(47.641664, -122.135979),
+new google.maps.LatLng(47.641732, -122.135952),
+new google.maps.LatLng(47.641802, -122.135943),
+new google.maps.LatLng(47.641872, -122.135952),
+new google.maps.LatLng(47.641940, -122.135979),
+new google.maps.LatLng(47.642004, -122.136024),
+new google.maps.LatLng(47.642062, -122.136084),
+new google.maps.LatLng(47.642111, -122.136158),
+new google.maps.LatLng(47.642152, -122.136243),
+new google.maps.LatLng(47.642182, -122.136338),
+new google.maps.LatLng(47.642200, -122.136439),
+];
+
+var polygon = new google.maps.Polygon({
+clickable: false,
+geodesic: true,
+fillColor: "#228B22",
+fillOpacity: 0.300000,
+paths: coords,
+strokeColor: "#228B22",
+strokeOpacity: 1.000000,
+strokeWeight: 1
+});
+
+polygon.setMap(map);
+
+
+var coords = [
+new google.maps.LatLng(47.640320, -122.131692),
+new google.maps.LatLng(47.640314, -122.131796),
+new google.maps.LatLng(47.640295, -122.131897),
+new google.maps.LatLng(47.640266, -122.131992),
+new google.maps.LatLng(47.640225, -122.132078),
+new google.maps.LatLng(47.640175, -122.132152),
+new google.maps.LatLng(47.640118, -122.132212),
+new google.maps.LatLng(47.640054, -122.132256),
+new google.maps.LatLng(47.639986, -122.132283),
+new google.maps.LatLng(47.639916, -122.132292),
+new google.maps.LatLng(47.639845, -122.132283),
+new google.maps.LatLng(47.639777, -122.132256),
+new google.maps.LatLng(47.639713, -122.132212),
+new google.maps.LatLng(47.639656, -122.132152),
+new google.maps.LatLng(47.639606, -122.132078),
+new google.maps.LatLng(47.639565, -122.131992),
+new google.maps.LatLng(47.639536, -122.131897),
+new google.maps.LatLng(47.639517, -122.131796),
+new google.maps.LatLng(47.639511, -122.131692),
+new google.maps.LatLng(47.639517, -122.131588),
+new google.maps.LatLng(47.639536, -122.131487),
+new google.maps.LatLng(47.639565, -122.131392),
+new google.maps.LatLng(47.639606, -122.131307),
+new google.maps.LatLng(47.639656, -122.131233),
+new google.maps.LatLng(47.639713, -122.131173),
+new google.maps.LatLng(47.639777, -122.131129),
+new google.maps.LatLng(47.639845, -122.131101),
+new google.maps.LatLng(47.639916, -122.131092),
+new google.maps.LatLng(47.639986, -122.131101),
+new google.maps.LatLng(47.640054, -122.131129),
+new google.maps.LatLng(47.640118, -122.131173),
+new google.maps.LatLng(47.640175, -122.131233),
+new google.maps.LatLng(47.640225, -122.131307),
+new google.maps.LatLng(47.640266, -122.131392),
+new google.maps.LatLng(47.640295, -122.131487),
+new google.maps.LatLng(47.640314, -122.131588),
+];
+
+var polygon = new google.maps.Polygon({
+clickable: false,
+geodesic: true,
+fillColor: "#228B22",
+fillOpacity: 0.300000,
+paths: coords,
+strokeColor: "#228B22",
+strokeOpacity: 1.000000,
+strokeWeight: 1
+});
+
+polygon.setMap(map);
+
+
+var coords = [
+new google.maps.LatLng(47.642206, -122.133309),
+new google.maps.LatLng(47.642200, -122.133413),
+new google.maps.LatLng(47.642182, -122.133514),
+new google.maps.LatLng(47.642152, -122.133609),
+new google.maps.LatLng(47.642111, -122.133695),
+new google.maps.LatLng(47.642062, -122.133769),
+new google.maps.LatLng(47.642004, -122.133829),
+new google.maps.LatLng(47.641940, -122.133873),
+new google.maps.LatLng(47.641872, -122.133900),
+new google.maps.LatLng(47.641802, -122.133909),
+new google.maps.LatLng(47.641732, -122.133900),
+new google.maps.LatLng(47.641664, -122.133873),
+new google.maps.LatLng(47.641600, -122.133829),
+new google.maps.LatLng(47.641542, -122.133769),
+new google.maps.LatLng(47.641492, -122.133695),
+new google.maps.LatLng(47.641452, -122.133609),
+new google.maps.LatLng(47.641422, -122.133514),
+new google.maps.LatLng(47.641404, -122.133413),
+new google.maps.LatLng(47.641398, -122.133309),
+new google.maps.LatLng(47.641404, -122.133205),
+new google.maps.LatLng(47.641422, -122.133104),
+new google.maps.LatLng(47.641452, -122.133009),
+new google.maps.LatLng(47.641492, -122.132924),
+new google.maps.LatLng(47.641542, -122.132850),
+new google.maps.LatLng(47.641600, -122.132790),
+new google.maps.LatLng(47.641664, -122.132745),
+new google.maps.LatLng(47.641732, -122.132718),
+new google.maps.LatLng(47.641802, -122.132709),
+new google.maps.LatLng(47.641872, -122.132718),
+new google.maps.LatLng(47.641940, -122.132745),
+new google.maps.LatLng(47.642004, -122.132790),
+new google.maps.LatLng(47.642062, -122.132850),
+new google.maps.LatLng(47.642111, -122.132924),
+new google.maps.LatLng(47.642152, -122.133009),
+new google.maps.LatLng(47.642182, -122.133104),
+new google.maps.LatLng(47.642200, -122.133205),
+];
+
+var polygon = new google.maps.Polygon({
+clickable: false,
+geodesic: true,
+fillColor: "#FFFF00",
+fillOpacity: 0.300000,
+paths: coords,
+strokeColor: "#FFFF00",
+strokeOpacity: 1.000000,
+strokeWeight: 1
+});
+
+polygon.setMap(map);
+
+
+var coords = [
+new google.maps.LatLng(47.644092, -122.131692),
+new google.maps.LatLng(47.644086, -122.131796),
+new google.maps.LatLng(47.644068, -122.131897),
+new google.maps.LatLng(47.644038, -122.131992),
+new google.maps.LatLng(47.643998, -122.132078),
+new google.maps.LatLng(47.643948, -122.132152),
+new google.maps.LatLng(47.643890, -122.132212),
+new google.maps.LatLng(47.643826, -122.132256),
+new google.maps.LatLng(47.643758, -122.132283),
+new google.maps.LatLng(47.643688, -122.132292),
+new google.maps.LatLng(47.643618, -122.132283),
+new google.maps.LatLng(47.643550, -122.132256),
+new google.maps.LatLng(47.643486, -122.132212),
+new google.maps.LatLng(47.643428, -122.132152),
+new google.maps.LatLng(47.643378, -122.132078),
+new google.maps.LatLng(47.643338, -122.131992),
+new google.maps.LatLng(47.643308, -122.131897),
+new google.maps.LatLng(47.643290, -122.131796),
+new google.maps.LatLng(47.643284, -122.131692),
+new google.maps.LatLng(47.643290, -122.131588),
+new google.maps.LatLng(47.643308, -122.131487),
+new google.maps.LatLng(47.643338, -122.131392),
+new google.maps.LatLng(47.643378, -122.131307),
+new google.maps.LatLng(47.643428, -122.131233),
+new google.maps.LatLng(47.643486, -122.131173),
+new google.maps.LatLng(47.643550, -122.131128),
+new google.maps.LatLng(47.643618, -122.131101),
+new google.maps.LatLng(47.643688, -122.131092),
+new google.maps.LatLng(47.643758, -122.131101),
+new google.maps.LatLng(47.643826, -122.131128),
+new google.maps.LatLng(47.643890, -122.131173),
+new google.maps.LatLng(47.643948, -122.131233),
+new google.maps.LatLng(47.643998, -122.131307),
+new google.maps.LatLng(47.644038, -122.131392),
+new google.maps.LatLng(47.644068, -122.131487),
+new google.maps.LatLng(47.644086, -122.131588),
+];
+
+var polygon = new google.maps.Polygon({
+clickable: false,
+geodesic: true,
+fillColor: "#FF0000",
+fillOpacity: 0.300000,
+paths: coords,
+strokeColor: "#FF0000",
+strokeOpacity: 1.000000,
+strokeWeight: 1
+});
+
+polygon.setMap(map);
 
-		var latlng = new google.maps.LatLng(47.610117, -122.303896);
-		var img = new google.maps.MarkerImage('/usr/local/lib/python2.7/site-packages/gmplot/markers/228B22.png');
-		var marker = new google.maps.Marker({
-		title: "no implementation",
-		icon: img,
-		position: latlng
-		});
-		marker.setMap(map);
-
-		var latlng = new google.maps.LatLng(47.614159, -122.307359);
-		var img = new google.maps.MarkerImage('/usr/local/lib/python2.7/site-packages/gmplot/markers/228B22.png');
-		var marker = new google.maps.Marker({
-		title: "no implementation",
-		icon: img,
-		position: latlng
-		});
-		marker.setMap(map);
-
-		var latlng = new google.maps.LatLng(47.614159, -122.314285);
-		var img = new google.maps.MarkerImage('/usr/local/lib/python2.7/site-packages/gmplot/markers/228B22.png');
-		var marker = new google.maps.Marker({
-		title: "no implementation",
-		icon: img,
-		position: latlng
-		});
-		marker.setMap(map);
-
-		var latlng = new google.maps.LatLng(47.606075, -122.314285);
-		var img = new google.maps.MarkerImage('/usr/local/lib/python2.7/site-packages/gmplot/markers/228B22.png');
-		var marker = new google.maps.Marker({
-		title: "no implementation",
-		icon: img,
-		position: latlng
-		});
-		marker.setMap(map);
-
-		var latlng = new google.maps.LatLng(47.610117, -122.317748);
-		var img = new google.maps.MarkerImage('/usr/local/lib/python2.7/site-packages/gmplot/markers/228B22.png');
-		var marker = new google.maps.Marker({
-		title: "no implementation",
-		icon: img,
-		position: latlng
-		});
-		marker.setMap(map);
-
-		var latlng = new google.maps.LatLng(47.606075, -122.307359);
-		var img = new google.maps.MarkerImage('/usr/local/lib/python2.7/site-packages/gmplot/markers/228B22.png');
-		var marker = new google.maps.Marker({
-		title: "no implementation",
-		icon: img,
-		position: latlng
-		});
-		marker.setMap(map);
-
-		var latlng = new google.maps.LatLng(47.610117, -122.296970);
-		var img = new google.maps.MarkerImage('/usr/local/lib/python2.7/site-packages/gmplot/markers/228B22.png');
-		var marker = new google.maps.Marker({
-		title: "no implementation",
-		icon: img,
-		position: latlng
-		});
-		marker.setMap(map);
-
-		var latlng = new google.maps.LatLng(47.614159, -122.300433);
-		var img = new google.maps.MarkerImage('/usr/local/lib/python2.7/site-packages/gmplot/markers/228B22.png');
-		var marker = new google.maps.Marker({
-		title: "no implementation",
-		icon: img,
-		position: latlng
-		});
-		marker.setMap(map);
-
-		var latlng = new google.maps.LatLng(47.606075, -122.300433);
-		var img = new google.maps.MarkerImage('/usr/local/lib/python2.7/site-packages/gmplot/markers/228B22.png');
-		var marker = new google.maps.Marker({
-		title: "no implementation",
-		icon: img,
-		position: latlng
-		});
-		marker.setMap(map);
-
-		var latlng = new google.maps.LatLng(47.618201, -122.303896);
-		var img = new google.maps.MarkerImage('/usr/local/lib/python2.7/site-packages/gmplot/markers/228B22.png');
-		var marker = new google.maps.Marker({
-		title: "no implementation",
-		icon: img,
-		position: latlng
-		});
-		marker.setMap(map);
-
-		var latlng = new google.maps.LatLng(47.618201, -122.310822);
-		var img = new google.maps.MarkerImage('/usr/local/lib/python2.7/site-packages/gmplot/markers/228B22.png');
-		var marker = new google.maps.Marker({
-		title: "no implementation",
-		icon: img,
-		position: latlng
-		});
-		marker.setMap(map);
-
-		var latlng = new google.maps.LatLng(47.618201, -122.317748);
-		var img = new google.maps.MarkerImage('/usr/local/lib/python2.7/site-packages/gmplot/markers/228B22.png');
-		var marker = new google.maps.Marker({
-		title: "no implementation",
-		icon: img,
-		position: latlng
-		});
-		marker.setMap(map);
-
-		var latlng = new google.maps.LatLng(47.614159, -122.321211);
-		var img = new google.maps.MarkerImage('/usr/local/lib/python2.7/site-packages/gmplot/markers/228B22.png');
-		var marker = new google.maps.Marker({
-		title: "no implementation",
-		icon: img,
-		position: latlng
-		});
-		marker.setMap(map);
-
-		var latlng = new google.maps.LatLng(47.602033, -122.317748);
-		var img = new google.maps.MarkerImage('/usr/local/lib/python2.7/site-packages/gmplot/markers/228B22.png');
-		var marker = new google.maps.Marker({
-		title: "no implementation",
-		icon: img,
-		position: latlng
-		});
-		marker.setMap(map);
-
-		var latlng = new google.maps.LatLng(47.606075, -122.321211);
-		var img = new google.maps.MarkerImage('/usr/local/lib/python2.7/site-packages/gmplot/markers/228B22.png');
-		var marker = new google.maps.Marker({
-		title: "no implementation",
-		icon: img,
-		position: latlng
-		});
-		marker.setMap(map);
-
-		var latlng = new google.maps.LatLng(47.602033, -122.310822);
-		var img = new google.maps.MarkerImage('/usr/local/lib/python2.7/site-packages/gmplot/markers/228B22.png');
-		var marker = new google.maps.Marker({
-		title: "no implementation",
-		icon: img,
-		position: latlng
-		});
-		marker.setMap(map);
-
-		var latlng = new google.maps.LatLng(47.610117, -122.324674);
-		var img = new google.maps.MarkerImage('/usr/local/lib/python2.7/site-packages/gmplot/markers/228B22.png');
-		var marker = new google.maps.Marker({
-		title: "no implementation",
-		icon: img,
-		position: latlng
-		});
-		marker.setMap(map);
-
-		var latlng = new google.maps.LatLng(47.602033, -122.303896);
-		var img = new google.maps.MarkerImage('/usr/local/lib/python2.7/site-packages/gmplot/markers/228B22.png');
-		var marker = new google.maps.Marker({
-		title: "no implementation",
-		icon: img,
-		position: latlng
-		});
-		marker.setMap(map);
-
-		var latlng = new google.maps.LatLng(47.610117, -122.290045);
-		var img = new google.maps.MarkerImage('/usr/local/lib/python2.7/site-packages/gmplot/markers/228B22.png');
-		var marker = new google.maps.Marker({
-		title: "no implementation",
-		icon: img,
-		position: latlng
-		});
-		marker.setMap(map);
-
-		var latlng = new google.maps.LatLng(47.614159, -122.293508);
-		var img = new google.maps.MarkerImage('/usr/local/lib/python2.7/site-packages/gmplot/markers/228B22.png');
-		var marker = new google.maps.Marker({
-		title: "no implementation",
-		icon: img,
-		position: latlng
-		});
-		marker.setMap(map);
-
-		var latlng = new google.maps.LatLng(47.606075, -122.293508);
-		var img = new google.maps.MarkerImage('/usr/local/lib/python2.7/site-packages/gmplot/markers/228B22.png');
-		var marker = new google.maps.Marker({
-		title: "no implementation",
-		icon: img,
-		position: latlng
-		});
-		marker.setMap(map);
-
-		var latlng = new google.maps.LatLng(47.618201, -122.296970);
-		var img = new google.maps.MarkerImage('/usr/local/lib/python2.7/site-packages/gmplot/markers/228B22.png');
-		var marker = new google.maps.Marker({
-		title: "no implementation",
-		icon: img,
-		position: latlng
-		});
-		marker.setMap(map);
-
-		var latlng = new google.maps.LatLng(47.602033, -122.296970);
-		var img = new google.maps.MarkerImage('/usr/local/lib/python2.7/site-packages/gmplot/markers/228B22.png');
-		var marker = new google.maps.Marker({
-		title: "no implementation",
-		icon: img,
-		position: latlng
-		});
-		marker.setMap(map);
-
-		var latlng = new google.maps.LatLng(47.622243, -122.300433);
-		var img = new google.maps.MarkerImage('/usr/local/lib/python2.7/site-packages/gmplot/markers/228B22.png');
-		var marker = new google.maps.Marker({
-		title: "no implementation",
-		icon: img,
-		position: latlng
-		});
-		marker.setMap(map);
-
-		var latlng = new google.maps.LatLng(47.622243, -122.307359);
-		var img = new google.maps.MarkerImage('/usr/local/lib/python2.7/site-packages/gmplot/markers/228B22.png');
-		var marker = new google.maps.Marker({
-		title: "no implementation",
-		icon: img,
-		position: latlng
-		});
-		marker.setMap(map);
-
-		var latlng = new google.maps.LatLng(47.622243, -122.314285);
-		var img = new google.maps.MarkerImage('/usr/local/lib/python2.7/site-packages/gmplot/markers/228B22.png');
-		var marker = new google.maps.Marker({
-		title: "no implementation",
-		icon: img,
-		position: latlng
-		});
-		marker.setMap(map);
-
-		var latlng = new google.maps.LatLng(47.622243, -122.321211);
-		var img = new google.maps.MarkerImage('/usr/local/lib/python2.7/site-packages/gmplot/markers/228B22.png');
-		var marker = new google.maps.Marker({
-		title: "no implementation",
-		icon: img,
-		position: latlng
-		});
-		marker.setMap(map);
-
-		var latlng = new google.maps.LatLng(47.618201, -122.324674);
-		var img = new google.maps.MarkerImage('/usr/local/lib/python2.7/site-packages/gmplot/markers/228B22.png');
-		var marker = new google.maps.Marker({
-		title: "no implementation",
-		icon: img,
-		position: latlng
-		});
-		marker.setMap(map);
-
-		var latlng = new google.maps.LatLng(47.614159, -122.328136);
-		var img = new google.maps.MarkerImage('/usr/local/lib/python2.7/site-packages/gmplot/markers/228B22.png');
-		var marker = new google.maps.Marker({
-		title: "no implementation",
-		icon: img,
-		position: latlng
-		});
-		marker.setMap(map);
-
-		var latlng = new google.maps.LatLng(47.597991, -122.321211);
-		var img = new google.maps.MarkerImage('/usr/local/lib/python2.7/site-packages/gmplot/markers/228B22.png');
-		var marker = new google.maps.Marker({
-		title: "no implementation",
-		icon: img,
-		position: latlng
-		});
-		marker.setMap(map);
-
-		var latlng = new google.maps.LatLng(47.602033, -122.324674);
-		var img = new google.maps.MarkerImage('/usr/local/lib/python2.7/site-packages/gmplot/markers/228B22.png');
-		var marker = new google.maps.Marker({
-		title: "no implementation",
-		icon: img,
-		position: latlng
-		});
-		marker.setMap(map);
-
-		var latlng = new google.maps.LatLng(47.597991, -122.314285);
-		var img = new google.maps.MarkerImage('/usr/local/lib/python2.7/site-packages/gmplot/markers/228B22.png');
-		var marker = new google.maps.Marker({
-		title: "no implementation",
-		icon: img,
-		position: latlng
-		});
-		marker.setMap(map);
-
-		var latlng = new google.maps.LatLng(47.606075, -122.328136);
-		var img = new google.maps.MarkerImage('/usr/local/lib/python2.7/site-packages/gmplot/markers/228B22.png');
-		var marker = new google.maps.Marker({
-		title: "no implementation",
-		icon: img,
-		position: latlng
-		});
-		marker.setMap(map);
-
-		var latlng = new google.maps.LatLng(47.597991, -122.307359);
-		var img = new google.maps.MarkerImage('/usr/local/lib/python2.7/site-packages/gmplot/markers/228B22.png');
-		var marker = new google.maps.Marker({
-		title: "no implementation",
-		icon: img,
-		position: latlng
-		});
-		marker.setMap(map);
-
-		var latlng = new google.maps.LatLng(47.610117, -122.331599);
-		var img = new google.maps.MarkerImage('/usr/local/lib/python2.7/site-packages/gmplot/markers/228B22.png');
-		var marker = new google.maps.Marker({
-		title: "no implementation",
-		icon: img,
-		position: latlng
-		});
-		marker.setMap(map);
-
-		var latlng = new google.maps.LatLng(47.597991, -122.300433);
-		var img = new google.maps.MarkerImage('/usr/local/lib/python2.7/site-packages/gmplot/markers/228B22.png');
-		var marker = new google.maps.Marker({
-		title: "no implementation",
-		icon: img,
-		position: latlng
-		});
-		marker.setMap(map);
-
-		var latlng = new google.maps.LatLng(47.614159, -122.286582);
-		var img = new google.maps.MarkerImage('/usr/local/lib/python2.7/site-packages/gmplot/markers/228B22.png');
-		var marker = new google.maps.Marker({
-		title: "no implementation",
-		icon: img,
-		position: latlng
-		});
-		marker.setMap(map);
-
-		var latlng = new google.maps.LatLng(47.606075, -122.286582);
-		var img = new google.maps.MarkerImage('/usr/local/lib/python2.7/site-packages/gmplot/markers/228B22.png');
-		var marker = new google.maps.Marker({
-		title: "no implementation",
-		icon: img,
-		position: latlng
-		});
-		marker.setMap(map);
-
-		var latlng = new google.maps.LatLng(47.618201, -122.290045);
-		var img = new google.maps.MarkerImage('/usr/local/lib/python2.7/site-packages/gmplot/markers/228B22.png');
-		var marker = new google.maps.Marker({
-		title: "no implementation",
-		icon: img,
-		position: latlng
-		});
-		marker.setMap(map);
-
-		var latlng = new google.maps.LatLng(47.602033, -122.290045);
-		var img = new google.maps.MarkerImage('/usr/local/lib/python2.7/site-packages/gmplot/markers/228B22.png');
-		var marker = new google.maps.Marker({
-		title: "no implementation",
-		icon: img,
-		position: latlng
-		});
-		marker.setMap(map);
-
-		var latlng = new google.maps.LatLng(47.622243, -122.293508);
-		var img = new google.maps.MarkerImage('/usr/local/lib/python2.7/site-packages/gmplot/markers/228B22.png');
-		var marker = new google.maps.Marker({
-		title: "no implementation",
-		icon: img,
-		position: latlng
-		});
-		marker.setMap(map);
-
-		var latlng = new google.maps.LatLng(47.597991, -122.293508);
-		var img = new google.maps.MarkerImage('/usr/local/lib/python2.7/site-packages/gmplot/markers/228B22.png');
-		var marker = new google.maps.Marker({
-		title: "no implementation",
-		icon: img,
-		position: latlng
-		});
-		marker.setMap(map);
-
-		var latlng = new google.maps.LatLng(47.626285, -122.296970);
-		var img = new google.maps.MarkerImage('/usr/local/lib/python2.7/site-packages/gmplot/markers/228B22.png');
-		var marker = new google.maps.Marker({
-		title: "no implementation",
-		icon: img,
-		position: latlng
-		});
-		marker.setMap(map);
-
-		var latlng = new google.maps.LatLng(47.626285, -122.303896);
-		var img = new google.maps.MarkerImage('/usr/local/lib/python2.7/site-packages/gmplot/markers/228B22.png');
-		var marker = new google.maps.Marker({
-		title: "no implementation",
-		icon: img,
-		position: latlng
-		});
-		marker.setMap(map);
-
-		var latlng = new google.maps.LatLng(47.626285, -122.310822);
-		var img = new google.maps.MarkerImage('/usr/local/lib/python2.7/site-packages/gmplot/markers/228B22.png');
-		var marker = new google.maps.Marker({
-		title: "no implementation",
-		icon: img,
-		position: latlng
-		});
-		marker.setMap(map);
-
-		var latlng = new google.maps.LatLng(47.626285, -122.317748);
-		var img = new google.maps.MarkerImage('/usr/local/lib/python2.7/site-packages/gmplot/markers/228B22.png');
-		var marker = new google.maps.Marker({
-		title: "no implementation",
-		icon: img,
-		position: latlng
-		});
-		marker.setMap(map);
-
-		var latlng = new google.maps.LatLng(47.626285, -122.324674);
-		var img = new google.maps.MarkerImage('/usr/local/lib/python2.7/site-packages/gmplot/markers/228B22.png');
-		var marker = new google.maps.Marker({
-		title: "no implementation",
-		icon: img,
-		position: latlng
-		});
-		marker.setMap(map);
-
-		var latlng = new google.maps.LatLng(47.614159, -122.335062);
-		var img = new google.maps.MarkerImage('/usr/local/lib/python2.7/site-packages/gmplot/markers/228B22.png');
-		var marker = new google.maps.Marker({
-		title: "no implementation",
-		icon: img,
-		position: latlng
-		});
-		marker.setMap(map);
-
-		var latlng = new google.maps.LatLng(47.593949, -122.317748);
-		var img = new google.maps.MarkerImage('/usr/local/lib/python2.7/site-packages/gmplot/markers/228B22.png');
-		var marker = new google.maps.Marker({
-		title: "no implementation",
-		icon: img,
-		position: latlng
-		});
-		marker.setMap(map);
-
-		var latlng = new google.maps.LatLng(47.602033, -122.331599);
-		var img = new google.maps.MarkerImage('/usr/local/lib/python2.7/site-packages/gmplot/markers/228B22.png');
-		var marker = new google.maps.Marker({
-		title: "no implementation",
-		icon: img,
-		position: latlng
-		});
-		marker.setMap(map);
-
-		var latlng = new google.maps.LatLng(47.593949, -122.310822);
-		var img = new google.maps.MarkerImage('/usr/local/lib/python2.7/site-packages/gmplot/markers/228B22.png');
-		var marker = new google.maps.Marker({
-		title: "no implementation",
-		icon: img,
-		position: latlng
-		});
-		marker.setMap(map);
-
-		var latlng = new google.maps.LatLng(47.606075, -122.335062);
-		var img = new google.maps.MarkerImage('/usr/local/lib/python2.7/site-packages/gmplot/markers/228B22.png');
-		var marker = new google.maps.Marker({
-		title: "no implementation",
-		icon: img,
-		position: latlng
-		});
-		marker.setMap(map);
-
-		var latlng = new google.maps.LatLng(47.593949, -122.303896);
-		var img = new google.maps.MarkerImage('/usr/local/lib/python2.7/site-packages/gmplot/markers/228B22.png');
-		var marker = new google.maps.Marker({
-		title: "no implementation",
-		icon: img,
-		position: latlng
-		});
-		marker.setMap(map);
-
-		var latlng = new google.maps.LatLng(47.606075, -122.279656);
-		var img = new google.maps.MarkerImage('/usr/local/lib/python2.7/site-packages/gmplot/markers/228B22.png');
-		var marker = new google.maps.Marker({
-		title: "no implementation",
-		icon: img,
-		position: latlng
-		});
-		marker.setMap(map);
-
-		var latlng = new google.maps.LatLng(47.630327, -122.300433);
-		var img = new google.maps.MarkerImage('/usr/local/lib/python2.7/site-packages/gmplot/markers/228B22.png');
-		var marker = new google.maps.Marker({
-		title: "no implementation",
-		icon: img,
-		position: latlng
-		});
-		marker.setMap(map);
-
-		var latlng = new google.maps.LatLng(47.630327, -122.307359);
-		var img = new google.maps.MarkerImage('/usr/local/lib/python2.7/site-packages/gmplot/markers/228B22.png');
-		var marker = new google.maps.Marker({
-		title: "no implementation",
-		icon: img,
-		position: latlng
-		});
-		marker.setMap(map);
-
-		var latlng = new google.maps.LatLng(47.589907, -122.314285);
-		var img = new google.maps.MarkerImage('/usr/local/lib/python2.7/site-packages/gmplot/markers/228B22.png');
-		var marker = new google.maps.Marker({
-		title: "no implementation",
-		icon: img,
-		position: latlng
-		});
-		marker.setMap(map);
-
-		var latlng = new google.maps.LatLng(47.610117, -122.283119);
-		var img = new google.maps.MarkerImage('/usr/local/lib/python2.7/site-packages/gmplot/markers/FFFF00.png');
-		var marker = new google.maps.Marker({
-		title: "no implementation",
-		icon: img,
-		position: latlng
-		});
-		marker.setMap(map);
-
-		var latlng = new google.maps.LatLng(47.622243, -122.328136);
-		var img = new google.maps.MarkerImage('/usr/local/lib/python2.7/site-packages/gmplot/markers/FFFF00.png');
-		var marker = new google.maps.Marker({
-		title: "no implementation",
-		icon: img,
-		position: latlng
-		});
-		marker.setMap(map);
-
-		var latlng = new google.maps.LatLng(47.593949, -122.324674);
-		var img = new google.maps.MarkerImage('/usr/local/lib/python2.7/site-packages/gmplot/markers/FFFF00.png');
-		var marker = new google.maps.Marker({
-		title: "no implementation",
-		icon: img,
-		position: latlng
-		});
-		marker.setMap(map);
-
-		var latlng = new google.maps.LatLng(47.597991, -122.328136);
-		var img = new google.maps.MarkerImage('/usr/local/lib/python2.7/site-packages/gmplot/markers/FFFF00.png');
-		var marker = new google.maps.Marker({
-		title: "no implementation",
-		icon: img,
-		position: latlng
-		});
-		marker.setMap(map);
-
-		var latlng = new google.maps.LatLng(47.610117, -122.338525);
-		var img = new google.maps.MarkerImage('/usr/local/lib/python2.7/site-packages/gmplot/markers/FFFF00.png');
-		var marker = new google.maps.Marker({
-		title: "no implementation",
-		icon: img,
-		position: latlng
-		});
-		marker.setMap(map);
-
-		var latlng = new google.maps.LatLng(47.593949, -122.296970);
-		var img = new google.maps.MarkerImage('/usr/local/lib/python2.7/site-packages/gmplot/markers/FFFF00.png');
-		var marker = new google.maps.Marker({
-		title: "no implementation",
-		icon: img,
-		position: latlng
-		});
-		marker.setMap(map);
-
-		var latlng = new google.maps.LatLng(47.610117, -122.276193);
-		var img = new google.maps.MarkerImage('/usr/local/lib/python2.7/site-packages/gmplot/markers/FFFF00.png');
-		var marker = new google.maps.Marker({
-		title: "no implementation",
-		icon: img,
-		position: latlng
-		});
-		marker.setMap(map);
-
-		var latlng = new google.maps.LatLng(47.614159, -122.279656);
-		var img = new google.maps.MarkerImage('/usr/local/lib/python2.7/site-packages/gmplot/markers/FFFF00.png');
-		var marker = new google.maps.Marker({
-		title: "no implementation",
-		icon: img,
-		position: latlng
-		});
-		marker.setMap(map);
-
-		var latlng = new google.maps.LatLng(47.618201, -122.283119);
-		var img = new google.maps.MarkerImage('/usr/local/lib/python2.7/site-packages/gmplot/markers/FFFF00.png');
-		var marker = new google.maps.Marker({
-		title: "no implementation",
-		icon: img,
-		position: latlng
-		});
-		marker.setMap(map);
-
-		var latlng = new google.maps.LatLng(47.602033, -122.283119);
-		var img = new google.maps.MarkerImage('/usr/local/lib/python2.7/site-packages/gmplot/markers/FFFF00.png');
-		var marker = new google.maps.Marker({
-		title: "no implementation",
-		icon: img,
-		position: latlng
-		});
-		marker.setMap(map);
-
-		var latlng = new google.maps.LatLng(47.622243, -122.286582);
-		var img = new google.maps.MarkerImage('/usr/local/lib/python2.7/site-packages/gmplot/markers/FFFF00.png');
-		var marker = new google.maps.Marker({
-		title: "no implementation",
-		icon: img,
-		position: latlng
-		});
-		marker.setMap(map);
-
-		var latlng = new google.maps.LatLng(47.597991, -122.286582);
-		var img = new google.maps.MarkerImage('/usr/local/lib/python2.7/site-packages/gmplot/markers/FFFF00.png');
-		var marker = new google.maps.Marker({
-		title: "no implementation",
-		icon: img,
-		position: latlng
-		});
-		marker.setMap(map);
-
-		var latlng = new google.maps.LatLng(47.626285, -122.290045);
-		var img = new google.maps.MarkerImage('/usr/local/lib/python2.7/site-packages/gmplot/markers/FFFF00.png');
-		var marker = new google.maps.Marker({
-		title: "no implementation",
-		icon: img,
-		position: latlng
-		});
-		marker.setMap(map);
-
-		var latlng = new google.maps.LatLng(47.593949, -122.290045);
-		var img = new google.maps.MarkerImage('/usr/local/lib/python2.7/site-packages/gmplot/markers/FFFF00.png');
-		var marker = new google.maps.Marker({
-		title: "no implementation",
-		icon: img,
-		position: latlng
-		});
-		marker.setMap(map);
-
-		var latlng = new google.maps.LatLng(47.630327, -122.293508);
-		var img = new google.maps.MarkerImage('/usr/local/lib/python2.7/site-packages/gmplot/markers/FFFF00.png');
-		var marker = new google.maps.Marker({
-		title: "no implementation",
-		icon: img,
-		position: latlng
-		});
-		marker.setMap(map);
-
-		var latlng = new google.maps.LatLng(47.630327, -122.314285);
-		var img = new google.maps.MarkerImage('/usr/local/lib/python2.7/site-packages/gmplot/markers/FFFF00.png');
-		var marker = new google.maps.Marker({
-		title: "no implementation",
-		icon: img,
-		position: latlng
-		});
-		marker.setMap(map);
-
-		var latlng = new google.maps.LatLng(47.630327, -122.321211);
-		var img = new google.maps.MarkerImage('/usr/local/lib/python2.7/site-packages/gmplot/markers/FFFF00.png');
-		var marker = new google.maps.Marker({
-		title: "no implementation",
-		icon: img,
-		position: latlng
-		});
-		marker.setMap(map);
-
-		var latlng = new google.maps.LatLng(47.622243, -122.335062);
-		var img = new google.maps.MarkerImage('/usr/local/lib/python2.7/site-packages/gmplot/markers/FFFF00.png');
-		var marker = new google.maps.Marker({
-		title: "no implementation",
-		icon: img,
-		position: latlng
-		});
-		marker.setMap(map);
-
-		var latlng = new google.maps.LatLng(47.618201, -122.338525);
-		var img = new google.maps.MarkerImage('/usr/local/lib/python2.7/site-packages/gmplot/markers/FFFF00.png');
-		var marker = new google.maps.Marker({
-		title: "no implementation",
-		icon: img,
-		position: latlng
-		});
-		marker.setMap(map);
-
-		var latlng = new google.maps.LatLng(47.614159, -122.341988);
-		var img = new google.maps.MarkerImage('/usr/local/lib/python2.7/site-packages/gmplot/markers/FFFF00.png');
-		var marker = new google.maps.Marker({
-		title: "no implementation",
-		icon: img,
-		position: latlng
-		});
-		marker.setMap(map);
-
-		var latlng = new google.maps.LatLng(47.589907, -122.321211);
-		var img = new google.maps.MarkerImage('/usr/local/lib/python2.7/site-packages/gmplot/markers/FFFF00.png');
-		var marker = new google.maps.Marker({
-		title: "no implementation",
-		icon: img,
-		position: latlng
-		});
-		marker.setMap(map);
-
-		var latlng = new google.maps.LatLng(47.597991, -122.335062);
-		var img = new google.maps.MarkerImage('/usr/local/lib/python2.7/site-packages/gmplot/markers/FFFF00.png');
-		var marker = new google.maps.Marker({
-		title: "no implementation",
-		icon: img,
-		position: latlng
-		});
-		marker.setMap(map);
-
-		var latlng = new google.maps.LatLng(47.602033, -122.338525);
-		var img = new google.maps.MarkerImage('/usr/local/lib/python2.7/site-packages/gmplot/markers/FFFF00.png');
-		var marker = new google.maps.Marker({
-		title: "no implementation",
-		icon: img,
-		position: latlng
-		});
-		marker.setMap(map);
-
-		var latlng = new google.maps.LatLng(47.589907, -122.307359);
-		var img = new google.maps.MarkerImage('/usr/local/lib/python2.7/site-packages/gmplot/markers/FFFF00.png');
-		var marker = new google.maps.Marker({
-		title: "no implementation",
-		icon: img,
-		position: latlng
-		});
-		marker.setMap(map);
-
-		var latlng = new google.maps.LatLng(47.606075, -122.341988);
-		var img = new google.maps.MarkerImage('/usr/local/lib/python2.7/site-packages/gmplot/markers/FFFF00.png');
-		var marker = new google.maps.Marker({
-		title: "no implementation",
-		icon: img,
-		position: latlng
-		});
-		marker.setMap(map);
-
-		var latlng = new google.maps.LatLng(47.589907, -122.300433);
-		var img = new google.maps.MarkerImage('/usr/local/lib/python2.7/site-packages/gmplot/markers/FFFF00.png');
-		var marker = new google.maps.Marker({
-		title: "no implementation",
-		icon: img,
-		position: latlng
-		});
-		marker.setMap(map);
-
-		var latlng = new google.maps.LatLng(47.589907, -122.293508);
-		var img = new google.maps.MarkerImage('/usr/local/lib/python2.7/site-packages/gmplot/markers/FFFF00.png');
-		var marker = new google.maps.Marker({
-		title: "no implementation",
-		icon: img,
-		position: latlng
-		});
-		marker.setMap(map);
-
-		var latlng = new google.maps.LatLng(47.610117, -122.269267);
-		var img = new google.maps.MarkerImage('/usr/local/lib/python2.7/site-packages/gmplot/markers/FFFF00.png');
-		var marker = new google.maps.Marker({
-		title: "no implementation",
-		icon: img,
-		position: latlng
-		});
-		marker.setMap(map);
-
-		var latlng = new google.maps.LatLng(47.606075, -122.272730);
-		var img = new google.maps.MarkerImage('/usr/local/lib/python2.7/site-packages/gmplot/markers/FFFF00.png');
-		var marker = new google.maps.Marker({
-		title: "no implementation",
-		icon: img,
-		position: latlng
-		});
-		marker.setMap(map);
-
-		var latlng = new google.maps.LatLng(47.602033, -122.276193);
-		var img = new google.maps.MarkerImage('/usr/local/lib/python2.7/site-packages/gmplot/markers/FFFF00.png');
-		var marker = new google.maps.Marker({
-		title: "no implementation",
-		icon: img,
-		position: latlng
-		});
-		marker.setMap(map);
-
-		var latlng = new google.maps.LatLng(47.622243, -122.279656);
-		var img = new google.maps.MarkerImage('/usr/local/lib/python2.7/site-packages/gmplot/markers/FFFF00.png');
-		var marker = new google.maps.Marker({
-		title: "no implementation",
-		icon: img,
-		position: latlng
-		});
-		marker.setMap(map);
-
-		var latlng = new google.maps.LatLng(47.597991, -122.279656);
-		var img = new google.maps.MarkerImage('/usr/local/lib/python2.7/site-packages/gmplot/markers/FFFF00.png');
-		var marker = new google.maps.Marker({
-		title: "no implementation",
-		icon: img,
-		position: latlng
-		});
-		marker.setMap(map);
-
-		var latlng = new google.maps.LatLng(47.593949, -122.283119);
-		var img = new google.maps.MarkerImage('/usr/local/lib/python2.7/site-packages/gmplot/markers/FFFF00.png');
-		var marker = new google.maps.Marker({
-		title: "no implementation",
-		icon: img,
-		position: latlng
-		});
-		marker.setMap(map);
-
-		var latlng = new google.maps.LatLng(47.630327, -122.286582);
-		var img = new google.maps.MarkerImage('/usr/local/lib/python2.7/site-packages/gmplot/markers/FFFF00.png');
-		var marker = new google.maps.Marker({
-		title: "no implementation",
-		icon: img,
-		position: latlng
-		});
-		marker.setMap(map);
-
-		var latlng = new google.maps.LatLng(47.634369, -122.296970);
-		var img = new google.maps.MarkerImage('/usr/local/lib/python2.7/site-packages/gmplot/markers/FFFF00.png');
-		var marker = new google.maps.Marker({
-		title: "no implementation",
-		icon: img,
-		position: latlng
-		});
-		marker.setMap(map);
-
-		var latlng = new google.maps.LatLng(47.634369, -122.303896);
-		var img = new google.maps.MarkerImage('/usr/local/lib/python2.7/site-packages/gmplot/markers/FFFF00.png');
-		var marker = new google.maps.Marker({
-		title: "no implementation",
-		icon: img,
-		position: latlng
-		});
-		marker.setMap(map);
-
-		var latlng = new google.maps.LatLng(47.634369, -122.310822);
-		var img = new google.maps.MarkerImage('/usr/local/lib/python2.7/site-packages/gmplot/markers/FFFF00.png');
-		var marker = new google.maps.Marker({
-		title: "no implementation",
-		icon: img,
-		position: latlng
-		});
-		marker.setMap(map);
-
-		var latlng = new google.maps.LatLng(47.634369, -122.317748);
-		var img = new google.maps.MarkerImage('/usr/local/lib/python2.7/site-packages/gmplot/markers/FFFF00.png');
-		var marker = new google.maps.Marker({
-		title: "no implementation",
-		icon: img,
-		position: latlng
-		});
-		marker.setMap(map);
-
-		var latlng = new google.maps.LatLng(47.585865, -122.317748);
-		var img = new google.maps.MarkerImage('/usr/local/lib/python2.7/site-packages/gmplot/markers/FFFF00.png');
-		var marker = new google.maps.Marker({
-		title: "no implementation",
-		icon: img,
-		position: latlng
-		});
-		marker.setMap(map);
-
-		var latlng = new google.maps.LatLng(47.585865, -122.310822);
-		var img = new google.maps.MarkerImage('/usr/local/lib/python2.7/site-packages/gmplot/markers/FFFF00.png');
-		var marker = new google.maps.Marker({
-		title: "no implementation",
-		icon: img,
-		position: latlng
-		});
-		marker.setMap(map);
-
-		var latlng = new google.maps.LatLng(47.602033, -122.345451);
-		var img = new google.maps.MarkerImage('/usr/local/lib/python2.7/site-packages/gmplot/markers/FFFF00.png');
-		var marker = new google.maps.Marker({
-		title: "no implementation",
-		icon: img,
-		position: latlng
-		});
-		marker.setMap(map);
-
-		var latlng = new google.maps.LatLng(47.585865, -122.303896);
-		var img = new google.maps.MarkerImage('/usr/local/lib/python2.7/site-packages/gmplot/markers/FFFF00.png');
-		var marker = new google.maps.Marker({
-		title: "no implementation",
-		icon: img,
-		position: latlng
-		});
-		marker.setMap(map);
-
-		var latlng = new google.maps.LatLng(47.606075, -122.348914);
-		var img = new google.maps.MarkerImage('/usr/local/lib/python2.7/site-packages/gmplot/markers/FFFF00.png');
-		var marker = new google.maps.Marker({
-		title: "no implementation",
-		icon: img,
-		position: latlng
-		});
-		marker.setMap(map);
-
-		var latlng = new google.maps.LatLng(47.585865, -122.296970);
-		var img = new google.maps.MarkerImage('/usr/local/lib/python2.7/site-packages/gmplot/markers/FFFF00.png');
-		var marker = new google.maps.Marker({
-		title: "no implementation",
-		icon: img,
-		position: latlng
-		});
-		marker.setMap(map);
-
-		var latlng = new google.maps.LatLng(47.618201, -122.331599);
-		var img = new google.maps.MarkerImage('/usr/local/lib/python2.7/site-packages/gmplot/markers/FF0000.png');
-		var marker = new google.maps.Marker({
-		title: "no implementation",
-		icon: img,
-		position: latlng
-		});
-		marker.setMap(map);
-
-		var latlng = new google.maps.LatLng(47.630327, -122.328136);
-		var img = new google.maps.MarkerImage('/usr/local/lib/python2.7/site-packages/gmplot/markers/FF0000.png');
-		var marker = new google.maps.Marker({
-		title: "no implementation",
-		icon: img,
-		position: latlng
-		});
-		marker.setMap(map);
-
-		var latlng = new google.maps.LatLng(47.626285, -122.331599);
-		var img = new google.maps.MarkerImage('/usr/local/lib/python2.7/site-packages/gmplot/markers/FF0000.png');
-		var marker = new google.maps.Marker({
-		title: "no implementation",
-		icon: img,
-		position: latlng
-		});
-		marker.setMap(map);
-
-		var latlng = new google.maps.LatLng(47.589907, -122.328136);
-		var img = new google.maps.MarkerImage('/usr/local/lib/python2.7/site-packages/gmplot/markers/FF0000.png');
-		var marker = new google.maps.Marker({
-		title: "no implementation",
-		icon: img,
-		position: latlng
-		});
-		marker.setMap(map);
-
-		var latlng = new google.maps.LatLng(47.593949, -122.331599);
-		var img = new google.maps.MarkerImage('/usr/local/lib/python2.7/site-packages/gmplot/markers/FF0000.png');
-		var marker = new google.maps.Marker({
-		title: "no implementation",
-		icon: img,
-		position: latlng
-		});
-		marker.setMap(map);
-
-		var latlng = new google.maps.LatLng(47.610117, -122.345451);
-		var img = new google.maps.MarkerImage('/usr/local/lib/python2.7/site-packages/gmplot/markers/FF0000.png');
-		var marker = new google.maps.Marker({
-		title: "no implementation",
-		icon: img,
-		position: latlng
-		});
-		marker.setMap(map);
-
-		var latlng = new google.maps.LatLng(47.614159, -122.272730);
-		var img = new google.maps.MarkerImage('/usr/local/lib/python2.7/site-packages/gmplot/markers/FF0000.png');
-		var marker = new google.maps.Marker({
-		title: "no implementation",
-		icon: img,
-		position: latlng
-		});
-		marker.setMap(map);
-
-		var latlng = new google.maps.LatLng(47.618201, -122.276193);
-		var img = new google.maps.MarkerImage('/usr/local/lib/python2.7/site-packages/gmplot/markers/FF0000.png');
-		var marker = new google.maps.Marker({
-		title: "no implementation",
-		icon: img,
-		position: latlng
-		});
-		marker.setMap(map);
-
-		var latlng = new google.maps.LatLng(47.626285, -122.283119);
-		var img = new google.maps.MarkerImage('/usr/local/lib/python2.7/site-packages/gmplot/markers/FF0000.png');
-		var marker = new google.maps.Marker({
-		title: "no implementation",
-		icon: img,
-		position: latlng
-		});
-		marker.setMap(map);
-
-		var latlng = new google.maps.LatLng(47.589907, -122.286582);
-		var img = new google.maps.MarkerImage('/usr/local/lib/python2.7/site-packages/gmplot/markers/FF0000.png');
-		var marker = new google.maps.Marker({
-		title: "no implementation",
-		icon: img,
-		position: latlng
-		});
-		marker.setMap(map);
-
-		var latlng = new google.maps.LatLng(47.634369, -122.290045);
-		var img = new google.maps.MarkerImage('/usr/local/lib/python2.7/site-packages/gmplot/markers/FF0000.png');
-		var marker = new google.maps.Marker({
-		title: "no implementation",
-		icon: img,
-		position: latlng
-		});
-		marker.setMap(map);
-
-		var latlng = new google.maps.LatLng(47.634369, -122.324674);
-		var img = new google.maps.MarkerImage('/usr/local/lib/python2.7/site-packages/gmplot/markers/FF0000.png');
-		var marker = new google.maps.Marker({
-		title: "no implementation",
-		icon: img,
-		position: latlng
-		});
-		marker.setMap(map);
-
-		var latlng = new google.maps.LatLng(47.634369, -122.331599);
-		var img = new google.maps.MarkerImage('/usr/local/lib/python2.7/site-packages/gmplot/markers/FF0000.png');
-		var marker = new google.maps.Marker({
-		title: "no implementation",
-		icon: img,
-		position: latlng
-		});
-		marker.setMap(map);
-
-		var latlng = new google.maps.LatLng(47.630327, -122.335062);
-		var img = new google.maps.MarkerImage('/usr/local/lib/python2.7/site-packages/gmplot/markers/FF0000.png');
-		var marker = new google.maps.Marker({
-		title: "no implementation",
-		icon: img,
-		position: latlng
-		});
-		marker.setMap(map);
-
-		var latlng = new google.maps.LatLng(47.626285, -122.338525);
-		var img = new google.maps.MarkerImage('/usr/local/lib/python2.7/site-packages/gmplot/markers/FF0000.png');
-		var marker = new google.maps.Marker({
-		title: "no implementation",
-		icon: img,
-		position: latlng
-		});
-		marker.setMap(map);
-
-		var latlng = new google.maps.LatLng(47.622243, -122.341988);
-		var img = new google.maps.MarkerImage('/usr/local/lib/python2.7/site-packages/gmplot/markers/FF0000.png');
-		var marker = new google.maps.Marker({
-		title: "no implementation",
-		icon: img,
-		position: latlng
-		});
-		marker.setMap(map);
-
-		var latlng = new google.maps.LatLng(47.618201, -122.345451);
-		var img = new google.maps.MarkerImage('/usr/local/lib/python2.7/site-packages/gmplot/markers/FF0000.png');
-		var marker = new google.maps.Marker({
-		title: "no implementation",
-		icon: img,
-		position: latlng
-		});
-		marker.setMap(map);
-
-		var latlng = new google.maps.LatLng(47.614159, -122.348914);
-		var img = new google.maps.MarkerImage('/usr/local/lib/python2.7/site-packages/gmplot/markers/FF0000.png');
-		var marker = new google.maps.Marker({
-		title: "no implementation",
-		icon: img,
-		position: latlng
-		});
-		marker.setMap(map);
-
-		var latlng = new google.maps.LatLng(47.585865, -122.331599);
-		var img = new google.maps.MarkerImage('/usr/local/lib/python2.7/site-packages/gmplot/markers/FF0000.png');
-		var marker = new google.maps.Marker({
-		title: "no implementation",
-		icon: img,
-		position: latlng
-		});
-		marker.setMap(map);
-
-		var latlng = new google.maps.LatLng(47.589907, -122.335062);
-		var img = new google.maps.MarkerImage('/usr/local/lib/python2.7/site-packages/gmplot/markers/FF0000.png');
-		var marker = new google.maps.Marker({
-		title: "no implementation",
-		icon: img,
-		position: latlng
-		});
-		marker.setMap(map);
-
-		var latlng = new google.maps.LatLng(47.585865, -122.324674);
-		var img = new google.maps.MarkerImage('/usr/local/lib/python2.7/site-packages/gmplot/markers/FF0000.png');
-		var marker = new google.maps.Marker({
-		title: "no implementation",
-		icon: img,
-		position: latlng
-		});
-		marker.setMap(map);
-
-		var latlng = new google.maps.LatLng(47.593949, -122.338525);
-		var img = new google.maps.MarkerImage('/usr/local/lib/python2.7/site-packages/gmplot/markers/FF0000.png');
-		var marker = new google.maps.Marker({
-		title: "no implementation",
-		icon: img,
-		position: latlng
-		});
-		marker.setMap(map);
-
-		var latlng = new google.maps.LatLng(47.597991, -122.341988);
-		var img = new google.maps.MarkerImage('/usr/local/lib/python2.7/site-packages/gmplot/markers/FF0000.png');
-		var marker = new google.maps.Marker({
-		title: "no implementation",
-		icon: img,
-		position: latlng
-		});
-		marker.setMap(map);
-
-		var latlng = new google.maps.LatLng(47.610117, -122.352377);
-		var img = new google.maps.MarkerImage('/usr/local/lib/python2.7/site-packages/gmplot/markers/FF0000.png');
-		var marker = new google.maps.Marker({
-		title: "no implementation",
-		icon: img,
-		position: latlng
-		});
-		marker.setMap(map);
-
-		var latlng = new google.maps.LatLng(47.585865, -122.290045);
-		var img = new google.maps.MarkerImage('/usr/local/lib/python2.7/site-packages/gmplot/markers/FF0000.png');
-		var marker = new google.maps.Marker({
-		title: "no implementation",
-		icon: img,
-		position: latlng
-		});
-		marker.setMap(map);
 
 	}
 </script>
