@@ -1,10 +1,12 @@
 # UberLens
-Visualize Uber fare rates in your area! (still WIP...)
+## Visualize Uber fare rates in your area!
+From an origin to a destination:
+![blah](https://raw.githubusercontent.com/adamalawrence/UberLens/master/Screen%20Shot%202017-06-29%20at%2012.46.16%20AM.png)
+Fares surrounding a certain location:
 ![hmm check the repo for the pic](https://raw.githubusercontent.com/adamalawrence/UberLens/master/Screen%20Shot%202017-06-27%20at%2012.39.10%20AM.png)
 
 
-# UberLens - Fare Visualization
-
+### Notes
 *Get data --> visualize data*
 
 Microsoft office locations:
