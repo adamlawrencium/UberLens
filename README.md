@@ -1,5 +1,4 @@
-# UberLens
-## Visualize Uber fare rates in your area!
+# UberLens - Visualize Uber fare rates in your area
 From an origin to a destination:
 ![blah](https://raw.githubusercontent.com/adamalawrence/UberLens/master/Screen%20Shot%202017-06-29%20at%2012.46.16%20AM.png)
 Fares surrounding a certain location:
