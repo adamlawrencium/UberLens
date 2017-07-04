@@ -20,9 +20,9 @@ if __name__ == '__main__':
     larkspur = '15805 SE 37th St, Bellevue, WA 98006'
 
     # # # # # USER INPUTS # # # # #
-    origin_of_travel = msft_redmond
-    destination = msft_seattle
-    num_shells = 20 # a_n = 3n^2 - 3n + 1 (careful lol): 1, 7, 19, 37, 61, ...
+    origin_of_travel = larkspur
+    destination = building_44
+    num_shells = 10 # a_n = 3n^2 - 3n + 1 (careful lol): 1, 7, 19, 37, 61, ...
     major = 200     # 200 suggested
     # # # # # # # # # # # # # # # #
 
