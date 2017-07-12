@@ -51,7 +51,7 @@ Also if you didn't name your folder `env` as shown above you'll need to replace 
 ```
 - Restore python package dependencies:
 ```shell
-> pip install requirements.txt
+> pip install -r requirements.txt
 ```
 
 ### Run
