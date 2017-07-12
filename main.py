@@ -22,7 +22,7 @@ if __name__ == '__main__':
     # # # # # USER INPUTS # # # # #
     origin_of_travel = larkspur
     destination = building_44
-    num_shells = 10 # a_n = 3n^2 - 3n + 1 (careful lol): 1, 7, 19, 37, 61, ...
+    num_shells = 3 # a_n = 3n^2 - 3n + 1 (careful lol): 1, 7, 19, 37, 61, ...
     major = 200     # 200 suggested
     # # # # # # # # # # # # # # # #
 

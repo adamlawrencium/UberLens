@@ -1,0 +1,8 @@
+certifi==2017.4.17
+chardet==3.0.4
+colour==0.1.4
+gmplot==1.1.1
+googlemaps==2.5.1
+idna==2.5
+requests==2.18.1
+urllib3==1.21.1
