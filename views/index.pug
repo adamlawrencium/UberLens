@@ -1,38 +1,20 @@
-//- extends layout
+extends layout
 
-//- block content
-//-   h1= title
-//-   p Welcome to #{title}
-//-   .containrer
-//-     .row
-//-       .col-lg-12
-//-         .jumbotron
-//-           p Hello
-doctype html
-html(lang='en')
-  head
-    meta(charset='utf-8')
-    meta(http-equiv='X-UA-Compatible', content='IE=edge')
-    meta(name='viewport', content='width=device-width, initial-scale=1')
-    // The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags
-    meta(name='description', content='')
-    meta(name='author', content='')
-    link(rel='icon', href='../../favicon.ico')
-    title Narrow Jumbotron Template for Bootstrap
-    
-    // Bootstrap core CSS
-    link(rel="stylesheet", href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css", integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7", crossorigin="anonymous")
-    link(rel="stylesheet", href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css", integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r", crossorigin="anonymous")
-    script(src="https://code.jquery.com/jquery-2.2.4.js", integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI=", crossorigin="anonymous")
-    script(src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js", integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS", crossorigin="anonymous")
+block content
 
-    //- link(href='../../dist/css/bootstrap.min.css', rel='stylesheet')
-    //- link(href='../../assets/css/ie10-viewport-bug-workaround.css', rel='stylesheet')
-    // Custom styles for this template
-    link(href='https://getbootstrap.com/docs/3.3/examples/jumbotron-narrow/jumbotron-narrow.css', rel='stylesheet')
-    //- script(src='../../assets/js/ie-emulation-modes-warning.js')
-  body
+  
+
+  
+    input#autocomplete(placeholder='Enter your address', onfocus='geolocate()', type='text')
+
+
+
+
+        
+
     .container
+      img(src='/images/UberLens-logo-inline-cropped.png', margin-bottom="100px")
+      br
       .header.clearfix
         nav
           ul.nav.nav-pills.pull-right
@@ -41,7 +23,7 @@ html(lang='en')
         //- a.navbar-left(href='#')
         //-   img(src='/Users/adamlawrence/Developer/UberLens/myapp/views/UberLens-logo-inline.png')
 
-        h3.text-muted UberLens.io 
+      //-   h3.text-muted UberLens.io 
       .jumbotron
         //- h2 Jumbotron heading
         form
@@ -52,7 +34,7 @@ html(lang='en')
             label(for='exampleInputPassword1') Where you're goin
             input#exampleInputPassword1.form-control(type='password', placeholder='e.g. Molly Moon\'s ice cream')
           .form-group
-            label(for='exampleInputPassword1') How far are you willing to walk?
+            label(for='exampleInputPassword1') How far are you willing to walk to your destination from your Uber drop off?
             br
             label.radio-inline
               input#inlineRadio1(type='radio', name='inlineRadioOptions', value='option1')
@@ -88,3 +70,38 @@ html(lang='en')
         p in/adamadlawrence.
         p https://github.com/adamalawrence/UberLens
     // /container
+
+    //- doctype html
+//- html(lang='en')
+//-   head
+//-     meta(charset='utf-8')
+//-     meta(http-equiv='X-UA-Compatible', content='IE=edge')
+//-     meta(name='viewport', content='width=device-width, initial-scale=1')
+//-     // The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags
+//-     meta(name='description', content='')
+//-     meta(name='author', content='')
+//-     link(rel='icon', href='../../favicon.ico')
+//-     title Narrow Jumbotron Template for Bootstrap
+    
+//-     // Bootstrap core CSS
+//-     link(rel="stylesheet", href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css", integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7", crossorigin="anonymous")
+//-     link(rel="stylesheet", href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css", integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r", crossorigin="anonymous")
+//-     link(rel='stylesheet', href='/stylesheets/style.css')
+
+
+//-     script(src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCkUOdZ5y7hMm0yrcCQoCvLwzdM6M8s5qk&libraries=places&callback=initMap")
+//-     script(src="https://code.jquery.com/jquery-2.2.4.js", integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI=", crossorigin="anonymous")
+//-     script(src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js", integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS", crossorigin="anonymous")
+
+//-     //- link(href='../../dist/css/bootstrap.min.css', rel='stylesheet')
+//-     //- link(href='../../assets/css/ie10-viewport-bug-workaround.css', rel='stylesheet')
+//-     // Custom styles for this template
+//-     link(href='https://getbootstrap.com/docs/3.3/examples/jumbotron-narrow/jumbotron-narrow.css', rel='stylesheet')
+//-     //- script(src='../../assets/js/ie-emulation-modes-warning.js')
+//-   body
+    
+//-     // Navigation
+//-     //- nav.navbar.navbar-expand-lg.navbar-dark.bg-dark.fixed-top
+//-     //-   .container
+//-     //-     a.navbar-brand(href='#')
+          
