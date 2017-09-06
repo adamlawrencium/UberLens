@@ -12,7 +12,7 @@ if __name__ == '__main__':
     # POIs in Puget Sound
     msft_seattle = '320 Westlake Ave N, Seattle, WA 98109'
     msft_studioG = '3950 148th Ave NE, Redmond, WA 98052'
-    building_44 = '15595 NE 36th St, Redmond, WA 98052'
+    studio_D = '15030 NE 36th St, Redmond, WA 98052'
     center_seattle = '832 16th Ave, Seattle, WA 98122'
     molly_moons = '917 E Pine St, Seattle, WA 98122'
     msft_bellevue = '205 108th Ave NE, Bellevue, WA 98004'
@@ -20,8 +20,8 @@ if __name__ == '__main__':
     larkspur = '15805 SE 37th St, Bellevue, WA 98006'
 
     # # # # # USER INPUTS # # # # #
-    origin_of_travel = larkspur
-    destination = building_44
+    origin_of_travel = studio_D
+    destination = center_seattle
     num_shells = 10 # a_n = 3n^2 - 3n + 1 (careful lol): 1, 7, 19, 37, 61, ...
     major = 200     # 200 suggested
     # # # # # # # # # # # # # # # #
