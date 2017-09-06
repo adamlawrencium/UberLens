@@ -5,10 +5,13 @@ from datetime import datetime
 from UberWrapper import UberWrapper
 from GMapsWrapper import GMapsWrapper
 from drawing import drawMapWithGradient
+import sys
 
 
 if __name__ == '__main__':
 
+    print sys.argv
+    # sys.exit()
     # POIs in Puget Sound
     msft_seattle = '320 Westlake Ave N, Seattle, WA 98109'
     msft_studioG = '3950 148th Ave NE, Redmond, WA 98052'
@@ -20,8 +23,8 @@ if __name__ == '__main__':
     larkspur = '15805 SE 37th St, Bellevue, WA 98006'
 
     # # # # # USER INPUTS # # # # #
-    origin_of_travel = studio_D
-    destination = center_seattle
+    origin_of_travel = sys.argv[1] #studio_D
+    destination = sys.argv[2] #center_seattle
     num_shells = 10 # a_n = 3n^2 - 3n + 1 (careful lol): 1, 7, 19, 37, 61, ...
     major = 200     # 200 suggested
     # # # # # # # # # # # # # # # #
@@ -70,6 +73,7 @@ if __name__ == '__main__':
         print "[%d/%d]:\t$%f" % (counter, num_hexs, fare)
         counter += 1
         # time.sleep(1)
+        sys.exit()
 
-
+    sys.exit()
     drawMapWithGradient(fares, list(origin_latlng), list(dest_latlng), 14)

@@ -1,4 +1,5 @@
 import googlemaps
+import os
 
 class GMapsWrapper(object):
     """ Wrapper for Google Maps API """
@@ -10,6 +11,10 @@ class GMapsWrapper(object):
         return self.gmaps.geocode(origin)
 
     def readAPI_key(self):
+        files = [f for f in os.listdir('.') if os.path.isfile(f)]
+        for f in files:
+            print f
+
         with open('APIKEYS.txt', 'r') as myfile:
             data = myfile.read().replace('\n', '')
             return data
