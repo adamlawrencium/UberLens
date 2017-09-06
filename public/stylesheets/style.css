@@ -1,0 +1,94 @@
+
+
+/* @media (min-width: 992px) {
+  body {
+    padding-top: 6px;
+  }
+} */
+img {
+    display: block;
+    margin: auto;
+    width: 50%;
+    max-width: 400px;
+}
+
+body {
+  padding: 0px;
+  background: url("/images/uber-themed-map.png") no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+
+
+
+
+@keyframes spinner {
+  to {transform: rotate(360deg);}
+}
+ 
+.spinner:before {
+  content: '';
+  box-sizing: border-box;
+  position: absolute;
+  /* top: 100%; */
+  left: 30%;
+  width: 30px;
+  height: 30px;
+  margin-top: -30px;
+  margin-left: 10px;
+  border-radius: 50%;
+  border: 3px solid #f6f;
+  border-top-color: #0e0;
+  border-right-color: #0dd;
+  border-bottom-color: #f90;
+  animation: spinner .6s linear infinite;
+}
+
+ /* Optional: Makes the sample page fill the window. 
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+} */
+
+#locationField, #controls {
+  position: relative;
+  width: 50;
+}
+#autocompleteorigin {
+  width: 99%;
+}
+#autocompletedestination {
+  width: 99%;
+}
+.label {
+  text-align: right;
+  font-weight: bold;
+  width: 100px;
+  color: #303030;
+}
+#address {
+  border: 1px solid #000090;
+  background-color: #f0f0ff;
+  width: 480px;
+  padding-right: 2px;
+}
+#address td {
+  font-size: 10pt;
+}
+.field {
+  width: 20%;
+}
+.slimField {
+  width: 80px;
+}
+.wideField {
+  width: 200px;
+}
+#locationField {
+  height: 20px;
+  margin-bottom: 2px;
+}

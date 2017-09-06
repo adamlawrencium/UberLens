@@ -1,4 +1,5 @@
 import googlemaps
+import os
 
 class GMapsWrapper(object):
     """ Wrapper for Google Maps API """
@@ -24,6 +25,11 @@ class GMapsWrapper(object):
         return self.get_lat_lng_from_geocode(geocode_result)
 
     def get_address_from_reverse_geocode(self, blob):
+        address = blob[0]['formatted_address']
+        return address
+
+    def get_address_from_latlng(self, latlng):
+        blob = self.gmaps.reverse_geocode(latlng)
         address = blob[0]['formatted_address']
         return address
 
