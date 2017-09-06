@@ -1,29 +1,10 @@
 extends layout
 
-block content
-
-  
-
-  
+block content  
     input#autocomplete(placeholder='Enter your address', onfocus='geolocate()', type='text')
-
-
-
-
-        
-
     .container
       img(src='/images/UberLens-logo-inline-cropped.png', margin-bottom="100px")
       br
-      .header.clearfix
-        nav
-          ul.nav.nav-pills.pull-right
-            li(role='presentation')
-              a(href='#') About
-        //- a.navbar-left(href='#')
-        //-   img(src='/Users/adamlawrence/Developer/UberLens/myapp/views/UberLens-logo-inline.png')
-
-      //-   h3.text-muted UberLens.io 
       .jumbotron
         //- h2 Jumbotron heading
         form
@@ -46,62 +27,9 @@ block content
               input#inlineRadio3(type='radio', name='inlineRadioOptions', value='option3')
               |  15 minutes
 
-            //- .radio
-            //-   label
-            //-     input(type='radio')
-            //-     | 5 minutes
-            //- .radio
-            //-   label
-            //-     input(type='radio')
-            //-     | 10 minutes
-            //- .radio
-            //-   label
-            //-     input(type='radio')
-            //-     | 15 minutes
-          //-   input#exampleInputPassword1.form-control(type='password', placeholder='e.g. Molly Moon\'s ice cream')
-          //- .checkbox
-          //-   label
-          //-     input(type='checkbox')
-          //-     |  Check me out
           button.btn.btn-primary(type='submit') Save $$$'s 
 
       footer.footer
         p © 2017 Adam Lawrence
         p in/adamadlawrence.
         p https://github.com/adamalawrence/UberLens
-    // /container
-
-    //- doctype html
-//- html(lang='en')
-//-   head
-//-     meta(charset='utf-8')
-//-     meta(http-equiv='X-UA-Compatible', content='IE=edge')
-//-     meta(name='viewport', content='width=device-width, initial-scale=1')
-//-     // The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags
-//-     meta(name='description', content='')
-//-     meta(name='author', content='')
-//-     link(rel='icon', href='../../favicon.ico')
-//-     title Narrow Jumbotron Template for Bootstrap
-    
-//-     // Bootstrap core CSS
-//-     link(rel="stylesheet", href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css", integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7", crossorigin="anonymous")
-//-     link(rel="stylesheet", href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css", integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r", crossorigin="anonymous")
-//-     link(rel='stylesheet', href='/stylesheets/style.css')
-
-
-//-     script(src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCkUOdZ5y7hMm0yrcCQoCvLwzdM6M8s5qk&libraries=places&callback=initMap")
-//-     script(src="https://code.jquery.com/jquery-2.2.4.js", integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI=", crossorigin="anonymous")
-//-     script(src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js", integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS", crossorigin="anonymous")
-
-//-     //- link(href='../../dist/css/bootstrap.min.css', rel='stylesheet')
-//-     //- link(href='../../assets/css/ie10-viewport-bug-workaround.css', rel='stylesheet')
-//-     // Custom styles for this template
-//-     link(href='https://getbootstrap.com/docs/3.3/examples/jumbotron-narrow/jumbotron-narrow.css', rel='stylesheet')
-//-     //- script(src='../../assets/js/ie-emulation-modes-warning.js')
-//-   body
-    
-//-     // Navigation
-//-     //- nav.navbar.navbar-expand-lg.navbar-dark.bg-dark.fixed-top
-//-     //-   .container
-//-     //-     a.navbar-brand(href='#')
-          
