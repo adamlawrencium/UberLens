@@ -88,7 +88,7 @@ function geolocate() {
     }
 }
 
-$(document).ready(function () {
+$(document).ready(function () { 
     $('#mySpinner').removeClass('spinner');
     google.maps.event.addDomListener(window, 'load', initAutocomplete);
     $('#submitbutton').click(() => {
