@@ -11,10 +11,6 @@ class GMapsWrapper(object):
         return self.gmaps.geocode(origin)
 
     def readAPI_key(self):
-        files = [f for f in os.listdir('.') if os.path.isfile(f)]
-        for f in files:
-            print f
-
         with open('APIKEYS.txt', 'r') as myfile:
             data = myfile.read().replace('\n', '')
             return data
@@ -29,6 +25,11 @@ class GMapsWrapper(object):
         return self.get_lat_lng_from_geocode(geocode_result)
 
     def get_address_from_reverse_geocode(self, blob):
+        address = blob[0]['formatted_address']
+        return address
+
+    def get_address_from_latlng(self, latlng):
+        blob = self.gmaps.reverse_geocode(latlng)
         address = blob[0]['formatted_address']
         return address
 

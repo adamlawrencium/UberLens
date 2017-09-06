@@ -37,19 +37,26 @@ app.get('/lens/', function( req, res) {
     mode: 'text',
     // pythonPath: 'path/to/python',
     // pythonOptions: ['-u'],
-    scriptPath: '../main.py',
+    // scriptPath: '',
     args: ['15805 SE 37th St, Bellevue, WA 98006', '15010 Northeast 36th Street, Redmond, WA 98052']
   };
-
-  PythonShell.run('../main.py', options, function (err, results) {
+  console.log('### Calling python script...');
+  PythonShell.run('main.py', options, function (err, results) {
     if (err) throw err;
     // results is an array consisting of messages collected during execution
-    console.log(results);
+    // console.log(results);
+    fares = {};
+    for (var i = 0; i < results.length; i++) {
+      // console.log(results[i].split("#"));
+      var addr = results[i].split("#")[0].trim();
+      var fare = parseFloat(results[i].split("#")[1].trim());
+      console.log(addr, fare);
+    }
   });
   // asynchronously call uber lens api
   const q = req.query;
-  res.send(q);
-});
+  res.send(q);  
+}); 
 
 
 

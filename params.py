@@ -16,7 +16,7 @@ pilImage = False
 major = 80
 mapsize = 600
 scaletime = 3600 # seconds, maximum travel time for scaling
-shells = 5
+shells = 2
 
 edgelen = major
 #fudge factor for longitude shrink, rounding. Experimentally determined
