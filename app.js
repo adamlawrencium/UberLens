@@ -32,11 +32,20 @@ app.get('/lens/', function( req, res) {
   const dest = req.query.dest;
   const walkpref = req.query.walkpref;
   
+  var options;
+  if (process.env.GMAPSAPIKEYPY) {
+    var options = {
+      mode: 'text',
+      args: [process.env.GMAPSAPIKEYPY, '15805 SE 37th St, Bellevue, WA 98006', '15010 Northeast 36th Street, Redmond, WA 98052']
+    };
+  } else {
+    var options = {
+      mode: 'text',
+      args: ['15805 SE 37th St, Bellevue, WA 98006', '15010 Northeast 36th Street, Redmond, WA 98052']
+    };
+  }
+  
   // call python script to get hex grid
-  var options = {
-    mode: 'text',
-    args: ['15805 SE 37th St, Bellevue, WA 98006', '15010 Northeast 36th Street, Redmond, WA 98052']
-  };
   console.log('### Calling python script...');
   PythonShell.run('main.py', options, function (err, results) {
     console.log(results);

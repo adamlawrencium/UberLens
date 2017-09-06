@@ -1,15 +1,15 @@
 import googlemaps
-import os
 
 class GMapsWrapper(object):
     """ Wrapper for Google Maps API """
-    def __init__(self):
-        APIKEY = self.readAPI_key()
-        self.gmaps = googlemaps.Client(key=APIKEY)
+    def __init__(self, KEY):
+        # APIKEY = self.readAPI_key()
+        self.gmaps = googlemaps.Client(key=KEY)
 
     def geocode(self, origin):
         return self.gmaps.geocode(origin)
 
+    # Deprecated
     def readAPI_key(self):
         with open('APIKEYS.txt', 'r') as myfile:
             data = myfile.read().replace('\n', '')
