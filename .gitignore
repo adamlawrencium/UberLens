@@ -2,4 +2,4 @@ APIKEYS.txt
 *.pyc
 /node_modules
 
-.vscode
+/.vscode
