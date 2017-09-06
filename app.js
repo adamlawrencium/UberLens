@@ -35,23 +35,16 @@ app.get('/lens/', function( req, res) {
   // call python script to get hex grid
   var options = {
     mode: 'text',
-    // pythonPath: 'path/to/python',
-    // pythonOptions: ['-u'],
-    // scriptPath: '',
     args: ['15805 SE 37th St, Bellevue, WA 98006', '15010 Northeast 36th Street, Redmond, WA 98052']
   };
   console.log('### Calling python script...');
   PythonShell.run('main.py', options, function (err, results) {
     if (err) throw err;
-    // results is an array consisting of messages collected during execution
-    // console.log(results);
     fares = {};
     for (var i = 0; i < results.length; i++) {
-      // console.log(results[i].split("#"));
       var addr = results[i].split("#")[0].trim();
       var fare = parseFloat(results[i].split("#")[1].trim());
       fares[addr] = fare;
-      // console.log(addr, fare);
     };
     var minFare = 999;
     var minAddr = '';
@@ -64,8 +57,7 @@ app.get('/lens/', function( req, res) {
     }
     console.log(fares);
     console.log(minFare);
-    // console.log(minFare, fares[minFare]);
-    res.send(`Go here!: ${minAddr}`);
+    res.send(`Go here! ${minAddr}\n at a $${minFare} rate!`);
   });
   // asynchronously call uber lens api
   // const q = req.query;
