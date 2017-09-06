@@ -25,7 +25,27 @@ body {
 
 
 
-
+@keyframes spinner {
+  to {transform: rotate(360deg);}
+}
+ 
+.spinner:before {
+  content: '';
+  box-sizing: border-box;
+  position: absolute;
+  /* top: 100%; */
+  left: 30%;
+  width: 30px;
+  height: 30px;
+  margin-top: -30px;
+  margin-left: 10px;
+  border-radius: 50%;
+  border: 3px solid #f6f;
+  border-top-color: #0e0;
+  border-right-color: #0dd;
+  border-bottom-color: #f90;
+  animation: spinner .6s linear infinite;
+}
 
  /* Optional: Makes the sample page fill the window. 
 html, body {

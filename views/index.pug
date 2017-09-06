@@ -7,16 +7,17 @@ block content
       img(src='/images/UberLens-logo-inline-cropped.png', margin-bottom="100px")
       br
       .jumbotron
+        p Using Uber's fare estimator tool, we can find the best address to Uber to within a certain walking distance of your destination. Try it out!
         //- h2 Jumbotron heading
         form
           .form-group
             label(for='autocompleteorigin') Where you at
-            input#autocompleteorigin(type='text', placeholder='e.g. 1999 Burdett Ave, Troy NY, 12180')
+            input#autocompleteorigin(type='text', placeholder='e.g. 1999 Burdett Ave, Troy NY, 12180' value="Microsoft Studio F, 148th Avenue Northeast, Redmond, WA, United States")
           .form-group
             label(for='autocompletedestination') Where you're goin
             input#autocompletedestination(type='text', placeholder='e.g. Molly Moon\'s Ice Cream')
           .form-group
-            label(for='exampleInputPassword1') How far are you willing to walk to your destination from your Uber drop off?
+            label(for='walkPref') How far are you willing to walk to your destination from your Uber drop off?
             br
             label.radio-inline
               input#inlineRadio1(type='radio', name='inlineRadioOptions', value='option1')
@@ -28,7 +29,11 @@ block content
               input#inlineRadio3(type='radio', name='inlineRadioOptions', value='option3')
               |  15 minutes
 
-          button.btn.btn-primary(type='submit') Save $$$'s 
+          button.btn.btn-primary#submitbutton(type='button') Save $$$'s
+          .mySpinner
+          //- button.btn.btn-primary
+          //-   i.fa.fa-spinner.fa-spin
+          //-   |  Finding the best route!
 
       footer.footer
         p © 2017 Adam Lawrence

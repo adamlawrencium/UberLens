@@ -39,8 +39,11 @@ app.get('/lens/', function( req, res) {
   };
   console.log('### Calling python script...');
   PythonShell.run('main.py', options, function (err, results) {
+    console.log(results);
     if (err) throw err;
     fares = {};
+    originalFare = [results[0].split("#")[0].trim(), parseFloat(results[0].split("#")[1].trim())];
+    fares['originalFare'] = originalFare
     for (var i = 0; i < results.length; i++) {
       var addr = results[i].split("#")[0].trim();
       var fare = parseFloat(results[i].split("#")[1].trim());
@@ -49,15 +52,16 @@ app.get('/lens/', function( req, res) {
     var minFare = 999;
     var minAddr = '';
     for (var key in fares) {
-      console.log('hi');
       if (fares[key] < minFare) {
         minFare = fares[key];
         minAddr = key;
       }
     }
+    fares['lowestFare'] = [minAddr, minFare];
     console.log(fares);
     console.log(minFare);
-    res.send(`Go here! ${minAddr}\n at a $${minFare} rate!`);
+    res.json(fares)
+    // res.send(`Go here! ${minAddr}\n at a $${minFare} rate!`);
   });
   // asynchronously call uber lens api
   // const q = req.query;

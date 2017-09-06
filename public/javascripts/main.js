@@ -50,7 +50,7 @@ function fillInAddress() {
     }
 
     ///////////
-    
+
     var placedestination = autocompleteorigin.getPlace();
 
     for (var component in componentForm) {
@@ -88,9 +88,30 @@ function geolocate() {
     }
 }
 
-$(document).ready( function() {
-    // alert('hi');
-    // geolocate();
+$(document).ready(function () {
+    $('#mySpinner').removeClass('spinner');
     google.maps.event.addDomListener(window, 'load', initAutocomplete);
-    
+    $('#submitbutton').click(() => {
+        $('#mySpinner').addClass('spinner');
+        const orig = $('#autocompleteorigin').val();
+        const dest = $('#autocompletedestination').val();
+        $.getJSON(`/lens?orig=${orig}&dest=${dest}`, (data) => {
+            $('#mySpinner').removeClass('spinner');
+            console.log(data);
+            const minAddr = data['lowestFare'][0]
+            const minFare = data['lowestFare'][1]
+            $(".jumbotron").append( `<p2>Found a cheaper destination!:</p2> <p>For $${minFare}, ${minAddr}</p>` );
+        })
+    })
+
+
+    // $('.btn').on('click', function () {
+    //     var $this = $(this);
+    //     $this.button('loading');
+    //     setTimeout(function () {
+    //         $this.button('reset');
+    //     }, 8000);
+    // });
+
+
 })
