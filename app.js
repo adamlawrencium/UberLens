@@ -50,12 +50,26 @@ app.get('/lens/', function( req, res) {
       // console.log(results[i].split("#"));
       var addr = results[i].split("#")[0].trim();
       var fare = parseFloat(results[i].split("#")[1].trim());
-      console.log(addr, fare);
+      fares[addr] = fare;
+      // console.log(addr, fare);
+    };
+    var minFare = 999;
+    var minAddr = '';
+    for (var key in fares) {
+      console.log('hi');
+      if (fares[key] < minFare) {
+        minFare = fares[key];
+        minAddr = key;
+      }
     }
+    console.log(fares);
+    console.log(minFare);
+    // console.log(minFare, fares[minFare]);
+    res.send(`Go here!: ${minAddr}`);
   });
   // asynchronously call uber lens api
-  const q = req.query;
-  res.send(q);  
+  // const q = req.query;
+  // res.send(q);  
 }); 
 
 
