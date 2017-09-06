@@ -1,3 +1,8 @@
+<p align="center">
+    <img src="https://user-images.githubusercontent.com/10917080/30120320-7c6aa6b4-92f6-11e7-9949-5479fa241969.png" width=600/>
+</p>
+
+
 # UberLens - visualize Uber fare rates in your area
 From an origin to a destination:
 ![blah](https://raw.githubusercontent.com/adamalawrence/UberLens/master/Screen%20Shot%202017-06-29%20at%2012.46.16%20AM.png)
