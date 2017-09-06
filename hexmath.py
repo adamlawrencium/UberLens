@@ -7,7 +7,7 @@ Hexagonal Grid Generator
 import math
 import random
 import params
-import gmplot
+# import gmplot
 
 # import fileclerk
 

@@ -4,7 +4,7 @@ import params
 from datetime import datetime
 from UberWrapper import UberWrapper
 from GMapsWrapper import GMapsWrapper
-from drawing import drawMapWithGradient
+# from drawing import drawMapWithGradient
 import sys
 import json
 
@@ -27,11 +27,12 @@ if __name__ == '__main__':
     origin_of_travel = ''
     destination = ''
     APIKEY = ''
-    if len(sys.argv == 4):
+    print sys.argv
+    if len(sys.argv) == 4:
         APIKEY = sys.argv[1]
         origin_of_travel = sys.argv[2] #studio_D
         destination = sys.argv[3] #center_seattle
-    elif len(sys.argv == 3):
+    elif len(sys.argv) == 3:
         origin_of_travel = sys.argv[1] #studio_D
         destination = sys.argv[2] #center_seattle
     num_shells = 2 # a_n = 3n^2 - 3n + 1 (careful lol): 1, 7, 19, 37, 61, ...
