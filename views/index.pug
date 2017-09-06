@@ -1,19 +1,20 @@
 extends layout
 
 block content  
-    input#autocomplete(placeholder='Enter your address', onfocus='geolocate()', type='text')
+    //- input#autocomplete(placeholder='Enter your address', onfocus='geolocate()', type='text')
     .container
+      br
       img(src='/images/UberLens-logo-inline-cropped.png', margin-bottom="100px")
       br
       .jumbotron
         //- h2 Jumbotron heading
         form
           .form-group
-            label(for='exampleInputEmail1') Where you at
-            input#exampleInputEmail1.form-control(type='email', placeholder='e.g. 1999 Burdett Ave, Troy NY, 12180')
+            label(for='autocompleteorigin') Where you at
+            input#autocompleteorigin(type='text', placeholder='e.g. 1999 Burdett Ave, Troy NY, 12180')
           .form-group
-            label(for='exampleInputPassword1') Where you're goin
-            input#exampleInputPassword1.form-control(type='password', placeholder='e.g. Molly Moon\'s ice cream')
+            label(for='autocompletedestination') Where you're goin
+            input#autocompletedestination(type='text', placeholder='e.g. Molly Moon\'s Ice Cream')
           .form-group
             label(for='exampleInputPassword1') How far are you willing to walk to your destination from your Uber drop off?
             br
