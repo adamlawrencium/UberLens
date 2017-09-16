@@ -54,9 +54,9 @@ app.get('/lens/', async function (req, res) {
 
   // Geocode an origin and destination
   let orig = await googleMapsClient.geocode({ address: studio_D }).asPromise();
-  console.log(orig.json.results);
+  // console.log(orig.json.results);
   let dest = await googleMapsClient.geocode({ address: molly_moons }).asPromise();
-  console.log(dest.json.results);
+  // console.log(dest.json.results);
   console.log();
 
 
@@ -71,10 +71,40 @@ app.get('/lens/', async function (req, res) {
   // FILTER OUT POINTS IN WATER
   let testForWater = hexGrid.map( (loc, index) => { return {lat: loc[0], lng: loc[1]} });
   testForWater = await googleMapsClient.elevation({locations:testForWater}).asPromise();
-  let notWater = testForWater.json.results.filter( location => { return location.elevation > 115.5 });
+  let notWater = testForWater.json.results.filter( location => { return location.elevation > 5 });
+  hexGrid = notWater.map( loc => { return {lat: loc.location.lat, lng: loc.location.lng}});
 
+  // TURN LAT LNGS INTO GOOGLE PLACE IDS
+  for (let i = 0; i < hexGrid.length; i++) {
+    // console.log(hexGrid[i]);
+  }
+
+  // let placeID_Queries = [];
+
+  let placeID_Queries = hexGrid.map( loc => {
+    return googleMapsClient.reverseGeocode({ latlng: [loc.lat, loc.lng] }).asPromise();
+  });
+
+  let reverseGeocodeRes = await Promise.all(placeID_Queries);
+  let placeIDs = reverseGeocodeRes.map( entry => {
+    return entry.json.results[0].place_id;      
+  });
+  console.log(placeIDs);
+  // let placeID = await googleMapsClient.reverseGeocode({ latlng: [hexGrid[0].lat, hexGrid[0].lng] }).asPromise();
+  // console.log(placeIDs.json.results[1].place_id);
+
+
+  // CALL UBER API ON ALL PLACE IDS
+  // const axios = require('axios');
   
-
+  // axios.get('https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY')
+  //   .then(response => {
+  //     console.log(response.data.url);
+  //     console.log(response.data.explanation);
+  //   })
+  //   .catch(error => {
+  //     console.log(error);
+  //   });
 });
 
 
