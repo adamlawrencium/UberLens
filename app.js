@@ -48,7 +48,7 @@ app.get('/lens/', async function (req, res) {
 
   // Create client with a Promise constructor
   const googleMapsClient = require('@google/maps').createClient({
-    key: 'AIzaSyC6PgCIuxWBNY3ITEakn8lxczgAqzzIgps',
+    key: 'AIzaSyC6PgCIuxWBNY3ITEakn8lxczgAqzzIgps', // this will be replaced...
     Promise: Promise // 'Promise' is the native constructor.
   });
 
