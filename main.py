@@ -1,6 +1,5 @@
 import time
 from hexmath import generate_hexgrid
-import params
 from datetime import datetime
 from UberWrapper import UberWrapper
 from GMapsWrapper import GMapsWrapper
