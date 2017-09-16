@@ -28,32 +28,50 @@ app.use('/users', users);
 
 app.get('/lens/', async function (req, res) {
   // get origin, destination, walkpref
-  const origin = req.query.origin;
-  const dest = req.query.dest;
+  // const origin = req.query.origin;
+  // const dest = req.query.dest;
   const walkpref = req.query.walkpref;
 
-  // let lat = 47.641387;
-  // let lng = -122.132817;
-  // let depth = 3;
-  // let major = 10;
-  // var options = {
-  //   mode: 'json',
-  //   args: [lat, lng, depth, major]
-  // };
+  // DEV INPUTS
+  const msft_seattle = '320 Westlake Ave N, Seattle, WA 98109'
+  const msft_studioG = '3950 148th Ave NE, Redmond, WA 98052'
+  const studio_D = '15030 NE 36th St, Redmond, WA 98052'
+  const center_seattle = '832 16th Ave, Seattle, WA 98122'
+  const molly_moons = '917 E Pine St, Seattle, WA 98122'
+  const msft_bellevue = '205 108th Ave NE, Bellevue, WA 98004'
+  const msft_redmond = '15010 Northeast 36th Street, Redmond, WA 98052'
+  const larkspur = '15805 SE 37th St, Bellevue, WA 98006'
+
+  // FEED INPUTS TO GOOGLE MAPS API FOR GEOCODING AIzaSyC6PgCIuxWBNY3ITEakn8lxczgAqzzIgps
+  // origin address to lat, lng
+  // destination address to lat, lng 
+
+  // Create client with a Promise constructor
+  const googleMapsClient = require('@google/maps').createClient({
+    key: 'AIzaSyC6PgCIuxWBNY3ITEakn8lxczgAqzzIgps',
+    Promise: Promise // 'Promise' is the native constructor.
+  });
+
+  // Geocode an origin and destination
+  let orig = await googleMapsClient.geocode({ address: studio_D }).asPromise();
+  console.log(orig.json.results);
+  let dest = await googleMapsClient.geocode({ address: molly_moons }).asPromise();
+  console.log(dest.json.results);
+
+
+  // GENERATE HEX GRID (inputs: destination latlng)
   try {
     let data = await hexGen();
     console.log(data);
     res.json(data);
   } catch (error) {
-    // res.json(error);
+    res.json(error);
   }
 
-  // .then( data => {
-  //   res.json(data);
-  // })
-  // .catch( err => {
-  //   res.json
-  // })
+  // FEED HEX GRID TO UBER API
+
+
+
 });
 
 
