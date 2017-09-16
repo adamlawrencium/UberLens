@@ -57,20 +57,23 @@ app.get('/lens/', async function (req, res) {
   console.log(orig.json.results);
   let dest = await googleMapsClient.geocode({ address: molly_moons }).asPromise();
   console.log(dest.json.results);
+  console.log();
 
 
   // GENERATE HEX GRID (inputs: destination latlng)
+  let hexGrid;
   try {
-    let data = await hexGen();
-    console.log(data);
-    res.json(data);
+    hexGrid = await hexGen();
   } catch (error) {
     res.json(error);
   }
 
-  // FEED HEX GRID TO UBER API
+  // FILTER OUT POINTS IN WATER
+  let testForWater = hexGrid.map( (loc, index) => { return {lat: loc[0], lng: loc[1]} });
+  testForWater = await googleMapsClient.elevation({locations:testForWater}).asPromise();
+  let notWater = testForWater.json.results.filter( location => { return location.elevation > 115.5 });
 
-
+  
 
 });
 
