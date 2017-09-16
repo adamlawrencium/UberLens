@@ -4,6 +4,8 @@ Hexagonal Grid Generator
 (c) Michael McDermott, for One Hudson
 """
 import math
+import sys
+import json
 
 
 LTM = True
@@ -36,6 +38,7 @@ def latlon_hash((x, y), prec=6):
 
 
 def generate_hexgrid(x, y, depth, major):
+    OUTPUT = {}
     hexcenters = [(x, y)]
     hexhashes = [latlon_hash((x, y))]
     lastshellsize = 0
@@ -47,8 +50,8 @@ def generate_hexgrid(x, y, depth, major):
         # Loop through outermost layer
         for node in active:
             newnodes = get_hex_neighbors(node[0], node[1], major)
-            for n in newnodes:
-                print n
+            # for n in newnodes:
+                # print n
             # print newnodes
             # return
             # Loop through outermost nodes' neighbors
@@ -58,12 +61,24 @@ def generate_hexgrid(x, y, depth, major):
                     hexcenters.append(newnode)
                     hexhashes.append(llhash)
         lastshellsize += 6
-    return hexcenters
+
+
+    OUTPUT['hexcenters'] = []
+    for center in hexcenters:
+        OUTPUT['hexcenters'].append(center)
+    # print json.dumps(OUTPUT)
+    print json.dumps(hexcenters)
 
 
 if __name__ == "__main__": 
     # a = get_hex_neighbors(47.641387, -122.132817, 1, True)
-    a = generate_hexgrid(47.641387, -122.132817, 3, 10)
+    lat = float(sys.argv[1])
+    lng = float(sys.argv[2])
+    depth = int(sys.argv[3])
+    major = int(sys.argv[4])
+    # print lat, lng, depth, major
+    generate_hexgrid(lat, lng, depth, major)
+    # print generate_hexgrid(47.641387, -122.132817, 3, 10)
 
     # for x in a: 
         # print x

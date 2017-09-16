@@ -34,7 +34,7 @@ function generateHexgrid(x, y, depth, major) {
     // Loop through main layers
     for (let i = 2; i < depth + 1; i++) {
         let active = [hexCenters[-lastShellSize]];
-        
+
         // Loop through outermost layer
         for (let j = 0; j < active.length; j++) {
             console.log(active);
@@ -58,4 +58,4 @@ function generateHexgrid(x, y, depth, major) {
 }
 
 // getHexNeighbors(47.641387, -122.132817, 1, true);
-generateHexgrid(47.641387, -122.132817, 3, 10);
+// generateHexgrid(47.641387, -122.132817, 3, 10);

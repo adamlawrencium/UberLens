@@ -32,49 +32,66 @@ app.get('/lens/', function( req, res) {
   const dest = req.query.dest;
   const walkpref = req.query.walkpref;
   
-  var options;
-  if (process.env.GMAPSAPIKEYPY) {
-    var options = {
-      mode: 'text',
-      args: [process.env.GMAPSAPIKEYPY, '15805 SE 37th St, Bellevue, WA 98006', '15010 Northeast 36th Street, Redmond, WA 98052']
-    };
-  } else {
-    var options = {
-      mode: 'text',
-      args: ['15805 SE 37th St, Bellevue, WA 98006', '15010 Northeast 36th Street, Redmond, WA 98052']
-    };
-  }
-  
-  // call python script to get hex grid
-  console.log('### Calling python script...');
-  PythonShell.run('main.py', options, function (err, results) {
-    console.log(results);
-    if (err) throw err;
-    fares = {};
-    originalFare = [results[0].split("#")[0].trim(), parseFloat(results[0].split("#")[1].trim())];
-    fares['originalFare'] = originalFare
-    for (var i = 0; i < results.length; i++) {
-      var addr = results[i].split("#")[0].trim();
-      var fare = parseFloat(results[i].split("#")[1].trim());
-      fares[addr] = fare;
-    };
-    var minFare = 999;
-    var minAddr = '';
-    for (var key in fares) {
-      if (fares[key] < minFare) {
-        minFare = fares[key];
-        minAddr = key;
-      }
+  // var options;
+  // if (process.env.GMAPSAPIKEYPY) {
+  //   var options = {
+  //     mode: 'text',
+  //     args: [process.env.GMAPSAPIKEYPY, '15805 SE 37th St, Bellevue, WA 98006', '15010 Northeast 36th Street, Redmond, WA 98052']
+  //   };
+  // } else {
+  //   var options = {
+  //     mode: 'text',
+  //     args: ['15805 SE 37th St, Bellevue, WA 98006', '15010 Northeast 36th Street, Redmond, WA 98052']
+  //   };
+  // }
+  let lat = 47.641387;
+  let lng = -122.132817;
+  let depth = 3;
+  let major = 10;
+  var options = {
+    mode: 'json',
+    args: [lat, lng, depth, major]
+  };
+  PythonShell.run('hexmath.py', options, function(err, results) {
+    if (err) {
+      console.log(err)
+      res.send(err);
+    } else {
+      console.log(results[0]);
     }
-    fares['lowestFare'] = [minAddr, minFare];
-    console.log(fares);
-    console.log(minFare);
-    res.json(fares)
-    // res.send(`Go here! ${minAddr}\n at a $${minFare} rate!`);
+    res.json(results[0]);
   });
-  // asynchronously call uber lens api
-  // const q = req.query;
-  // res.send(q);  
+
+//   // call python script to get hex grid
+//   console.log('### Calling python script...');
+//   PythonShell.run('main.py', options, function (err, results) {
+//     console.log(results);
+//     if (err) throw err;
+//     fares = {};
+//     originalFare = [results[0].split("#")[0].trim(), parseFloat(results[0].split("#")[1].trim())];
+//     fares['originalFare'] = originalFare
+//     for (var i = 0; i < results.length; i++) {
+//       var addr = results[i].split("#")[0].trim();
+//       var fare = parseFloat(results[i].split("#")[1].trim());
+//       fares[addr] = fare;
+//     };
+//     var minFare = 999;
+//     var minAddr = '';
+//     for (var key in fares) {
+//       if (fares[key] < minFare) {
+//         minFare = fares[key];
+//         minAddr = key;
+//       }
+//     }
+//     fares['lowestFare'] = [minAddr, minFare];
+//     console.log(fares);
+//     console.log(minFare);
+//     res.json(fares)
+//     // res.send(`Go here! ${minAddr}\n at a $${minFare} rate!`);
+//   });
+//   // asynchronously call uber lens api
+//   // const q = req.query;
+//   // res.send(q);  
 }); 
 
 
