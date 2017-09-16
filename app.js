@@ -26,7 +26,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', index);
 app.use('/users', users);
 
-app.get('/lens/', function (req, res) {
+app.get('/lens/', async function (req, res) {
   // get origin, destination, walkpref
   const origin = req.query.origin;
   const dest = req.query.dest;
@@ -40,9 +40,20 @@ app.get('/lens/', function (req, res) {
   //   mode: 'json',
   //   args: [lat, lng, depth, major]
   // };
-  hexGen.then( data => {
+  try {
+    let data = await hexGen();
+    console.log(data);
     res.json(data);
-  })
+  } catch (error) {
+    // res.json(error);
+  }
+
+  // .then( data => {
+  //   res.json(data);
+  // })
+  // .catch( err => {
+  //   res.json
+  // })
 });
 
 

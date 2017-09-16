@@ -9,14 +9,16 @@ var options = {
     args: [lat, lng, depth, major]
 };
 
-module.exports = new Promise((resolve, reject) => {
-    PythonShell.run('hexmath.py', options, function (err, results) {
-        if (err) {
-            console.log(err)
-            reject(err);
-        } else {
-            resolve(results[0]);
-            console.log(results[0]);
-        }
+module.exports = function () {
+    return new Promise((resolve, reject) => {
+        PythonShell.run('hexmath.py', options, function (err, results) {
+            if (err) {
+                console.log(err)
+                reject(err);
+            } else {
+                resolve(results[0]);
+                // console.log(results[0]);
+            }
+        });
     });
-});
+}
