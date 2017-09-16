@@ -5,6 +5,7 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var hexGen = require('./routes/hexGen.js');
+const axios = require('axios');
 
 var index = require('./routes/index');
 var users = require('./routes/users');
@@ -75,27 +76,52 @@ app.get('/lens/', async function (req, res) {
   hexGrid = notWater.map( loc => { return {lat: loc.location.lat, lng: loc.location.lng}});
 
   // TURN LAT LNGS INTO GOOGLE PLACE IDS
-  for (let i = 0; i < hexGrid.length; i++) {
-    // console.log(hexGrid[i]);
-  }
-
-  // let placeID_Queries = [];
-
   let placeID_Queries = hexGrid.map( loc => {
     return googleMapsClient.reverseGeocode({ latlng: [loc.lat, loc.lng] }).asPromise();
   });
-
   let reverseGeocodeRes = await Promise.all(placeID_Queries);
-  let placeIDs = reverseGeocodeRes.map( entry => {
-    return entry.json.results[0].place_id;      
-  });
+  let placeIDs = reverseGeocodeRes.map( entry => { return entry.json.results[0].place_id; });
   console.log(placeIDs);
-  // let placeID = await googleMapsClient.reverseGeocode({ latlng: [hexGrid[0].lat, hexGrid[0].lng] }).asPromise();
-  // console.log(placeIDs.json.results[1].place_id);
-
 
   // CALL UBER API ON ALL PLACE IDS
-  // const axios = require('axios');
+  const UberFareEstimatorURL = "https://www.uber.com/api/fare-estimate?"
+  let req_url = UberFareEstimatorURL + 'pickupRef=' + 'ChIJA4u3rXNtkFQRwXQnyYO1fCA' + '&destinationRef=' + 'ChIJ-T_C8W5tkFQRMHAHnllVKqc'
+  console.log(req_url)
+  axios.get(req_url)
+    .then(response => {
+      console.log(response.data);
+    })
+    .catch(error => {
+      console.log(error);
+    });
+  
+  /*
+      """
+    Wrapper for address-lookup api endpoint
+    """
+    def __init__(self):
+        self.url_AL = "https://www.uber.com/api/address-lookup?lat="
+        self.url_FE = "https://www.uber.com/api/fare-estimate?"
+
+    def address_lookup(self, lat, lng):
+        req = requests.get(self.url_AL + str(lat) + "&lng=" + str(lng))
+        return req.json()
+
+    def fare_estimator(self, pickupID, destID):
+        fares = []
+        req = self.url_FE + 'pickupRef=' + pickupID + '&destinationRef=' + destID
+        req = requests.get(req)
+        return req.json()
+
+    def get_UberX_from_fares(self, blob):
+
+        fares = blob['prices']
+        for vehicle in fares:
+            if vehicle['vehicleViewDisplayName'] == 'uberX':
+                return vehicle['fareString']
+
+        return 'PRICE NOT FOUND'
+*/
   
   // axios.get('https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY')
   //   .then(response => {
