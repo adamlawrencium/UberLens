@@ -4,7 +4,7 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-var PythonShell = require('python-shell');
+var hexGen = require('./routes/hexGen.js');
 
 var index = require('./routes/index');
 var users = require('./routes/users');
@@ -26,84 +26,35 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', index);
 app.use('/users', users);
 
-app.get('/lens/', function( req, res) {
+app.get('/lens/', function (req, res) {
   // get origin, destination, walkpref
   const origin = req.query.origin;
   const dest = req.query.dest;
   const walkpref = req.query.walkpref;
-  
-  // var options;
-  // if (process.env.GMAPSAPIKEYPY) {
-  //   var options = {
-  //     mode: 'text',
-  //     args: [process.env.GMAPSAPIKEYPY, '15805 SE 37th St, Bellevue, WA 98006', '15010 Northeast 36th Street, Redmond, WA 98052']
-  //   };
-  // } else {
-  //   var options = {
-  //     mode: 'text',
-  //     args: ['15805 SE 37th St, Bellevue, WA 98006', '15010 Northeast 36th Street, Redmond, WA 98052']
-  //   };
-  // }
-  let lat = 47.641387;
-  let lng = -122.132817;
-  let depth = 3;
-  let major = 10;
-  var options = {
-    mode: 'json',
-    args: [lat, lng, depth, major]
-  };
-  PythonShell.run('hexmath.py', options, function(err, results) {
-    if (err) {
-      console.log(err)
-      res.send(err);
-    } else {
-      console.log(results[0]);
-    }
-    res.json(results[0]);
-  });
 
-//   // call python script to get hex grid
-//   console.log('### Calling python script...');
-//   PythonShell.run('main.py', options, function (err, results) {
-//     console.log(results);
-//     if (err) throw err;
-//     fares = {};
-//     originalFare = [results[0].split("#")[0].trim(), parseFloat(results[0].split("#")[1].trim())];
-//     fares['originalFare'] = originalFare
-//     for (var i = 0; i < results.length; i++) {
-//       var addr = results[i].split("#")[0].trim();
-//       var fare = parseFloat(results[i].split("#")[1].trim());
-//       fares[addr] = fare;
-//     };
-//     var minFare = 999;
-//     var minAddr = '';
-//     for (var key in fares) {
-//       if (fares[key] < minFare) {
-//         minFare = fares[key];
-//         minAddr = key;
-//       }
-//     }
-//     fares['lowestFare'] = [minAddr, minFare];
-//     console.log(fares);
-//     console.log(minFare);
-//     res.json(fares)
-//     // res.send(`Go here! ${minAddr}\n at a $${minFare} rate!`);
-//   });
-//   // asynchronously call uber lens api
-//   // const q = req.query;
-//   // res.send(q);  
-}); 
+  // let lat = 47.641387;
+  // let lng = -122.132817;
+  // let depth = 3;
+  // let major = 10;
+  // var options = {
+  //   mode: 'json',
+  //   args: [lat, lng, depth, major]
+  // };
+  hexGen.then( data => {
+    res.json(data);
+  })
+});
 
 
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
   var err = new Error('Not Found');
   err.status = 404;
   next(err);
 });
 
 // error handler
-app.use(function(err, req, res, next) {
+app.use(function (err, req, res, next) {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
