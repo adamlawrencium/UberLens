@@ -32,6 +32,11 @@ app.get('/lens/', async function (req, res) {
   let orig = req.query.orig;
   let dest = req.query.dest;
   let walkpref = req.query.walkpref;
+  if (!(orig && dest && walkpref)) {
+    res.send('Please include origin, destination, and walk preference');
+    console.log(new Date(), 'Not all params provided');
+    return;
+  }
   console.log(new Date(), orig, dest, walkpref)
 
   // DEV INPUTS
@@ -102,7 +107,7 @@ app.get('/lens/', async function (req, res) {
     console.log(new Date(), 'getting fares [DONE]');
     for (let i = 0; i < uberFareRes.length; i++) {
       uberFares.push(uberFareRes[i].data);
-    }    
+    }
   } catch (error) {
     throw new Error(error);
   }
