@@ -6,3 +6,6 @@ APIKEYS.txt
 
 mymap.html
 .vscode/tags
+
+htmlcov/
+.coverage

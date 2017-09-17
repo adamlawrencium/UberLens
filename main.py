@@ -1,6 +1,5 @@
 import time
 from hexmath import generate_hexgrid
-import params
 from datetime import datetime
 from UberWrapper import UberWrapper
 from GMapsWrapper import GMapsWrapper
@@ -24,8 +23,8 @@ if __name__ == '__main__':
     larkspur = '15805 SE 37th St, Bellevue, WA 98006'
 
     # # # # # USER INPUTS # # # # #
-    origin_of_travel = ''
-    destination = ''
+    origin_of_travel = studio_D #''
+    destination = center_seattle#''
     APIKEY = ''
     print sys.argv
     if len(sys.argv) == 4:
@@ -41,7 +40,7 @@ if __name__ == '__main__':
 
     # Initialize wrappers
     Uber = UberWrapper()
-    GMaps = GMapsWrapper(APIKEY)
+    GMaps = GMapsWrapper(sys.argv[1])
 
 
 
@@ -87,12 +86,12 @@ if __name__ == '__main__':
         # print "[%d/%d]:\t$%f" % (counter, num_hexs, fare)
         # hex_output = [proximity_dest_placeID, fare]
         print "%s # %d" % (GMaps.get_address_from_latlng(centroid), fare)
-        # OUTPUT[GMaps.get_address_from_latlng(centroid)] = fare
+        OUTPUT[GMaps.get_address_from_latlng(centroid)] = fare
         counter += 1
         # time.sleep(1)
         # sys.exit()
 
     # OUTPUT = json.dumps(OUTPUT)
-    # print OUTPUT
+    print OUTPUT
     sys.exit()
     drawMapWithGradient(fares, list(origin_latlng), list(dest_latlng), 14)

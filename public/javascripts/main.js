@@ -95,7 +95,11 @@ $(document).ready(function () {
         $('#mySpinner').addClass('spinner');
         const orig = $('#autocompleteorigin').val();
         const dest = $('#autocompletedestination').val();
-        $.getJSON(`/lens?orig=${orig}&dest=${dest}`, (data) => {
+        const walkpref = $("input[name=walkprefs]:checked").val();
+        console.log(orig);
+        console.log(dest);
+        console.log(walkpref);
+        $.getJSON(`/lens?orig=${orig}&dest=${dest}&walkpref=${walkpref}`, (data) => {
             $('#mySpinner').removeClass('spinner');
             console.log(data);
             const minAddr = data['lowestFare'][0]
