@@ -6,11 +6,16 @@ var PythonShell = require('python-shell');
 // let major = 200;
 
 
-module.exports = function (lat, lng) {
+module.exports = function (lat, lng, walkpref) {
+    let pref;
+    if (walkpref == 5) {pref = 4}
+    else if (walkpref == 10) {pref = 6}
+    else if (walkpref == 15) {pref = 8}
+    else throw new Error();
 
     const options = {
         mode: 'json',
-        args: [lat, lng, 6, 200] // lat, lng, depth, major
+        args: [lat, lng, pref, 200] // lat, lng, depth, major
     };
 
     return new Promise((resolve, reject) => {
