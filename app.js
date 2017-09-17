@@ -32,7 +32,7 @@ app.get('/lens/', async function (req, res) {
   let orig = req.query.orig;
   let dest = req.query.dest;
   // let walkpref = req.query.walkpref;
-  console.log(orig, dest, walkpref);
+  // console.log(orig, dest);
 
   // DEV INPUTS
   const msft_seattle = '320 Westlake Ave N, Seattle, WA 98109'

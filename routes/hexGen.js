@@ -10,7 +10,7 @@ module.exports = function (lat, lng) {
 
     const options = {
         mode: 'json',
-        args: [lat, lng, 2, 200] // lat, lng, depth, major
+        args: [lat, lng, 6, 200] // lat, lng, depth, major
     };
 
     return new Promise((resolve, reject) => {
