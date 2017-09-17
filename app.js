@@ -7,6 +7,7 @@ var bodyParser = require('body-parser');
 var hexGen = require('./routes/hexGen.js');
 const axios = require('axios');
 
+
 var index = require('./routes/index');
 var users = require('./routes/users');
 
@@ -28,10 +29,10 @@ app.use('/', index);
 app.use('/users', users);
 
 app.get('/lens/', async function (req, res) {
-  // get origin, destination, walkpref
-  // const origin = req.query.origin;
-  // const dest = req.query.dest;
-  const walkpref = req.query.walkpref;
+  let orig = req.query.orig;
+  let dest = req.query.dest;
+  // let walkpref = req.query.walkpref;
+  console.log(orig, dest, walkpref);
 
   // DEV INPUTS
   const msft_seattle = '320 Westlake Ave N, Seattle, WA 98109'
@@ -43,10 +44,6 @@ app.get('/lens/', async function (req, res) {
   const msft_redmond = '15010 Northeast 36th Street, Redmond, WA 98052'
   const larkspur = '15805 SE 37th St, Bellevue, WA 98006'
 
-  // FEED INPUTS TO GOOGLE MAPS API FOR GEOCODING AIzaSyC6PgCIuxWBNY3ITEakn8lxczgAqzzIgps
-  // origin address to lat, lng
-  // destination address to lat, lng 
-
   // Create client with a Promise constructor
   const googleMapsClient = require('@google/maps').createClient({
     key: 'AIzaSyC6PgCIuxWBNY3ITEakn8lxczgAqzzIgps', // this will be replaced...
@@ -54,22 +51,18 @@ app.get('/lens/', async function (req, res) {
   });
 
   // Geocode an origin and destination
-  let orig = await googleMapsClient.geocode({ address: studio_D }).asPromise();
+  orig = await googleMapsClient.geocode({ address: orig }).asPromise();
   // console.log(orig.json.results[0].geometry.location);
-  let dest = await googleMapsClient.geocode({ address: molly_moons }).asPromise();
+  dest = await googleMapsClient.geocode({ address: dest }).asPromise();
   // console.log(dest.json.results);
-  // console.log();
-
-  let r = await googleMapsClient.reverseGeocode({ place_id: 'ChIJWZYFhG1tkFQRHqN9zKkOIS0' }).asPromise();
-  // console.log(r.json.results);
 
   // GENERATE HEX GRID (inputs: destination latlng)
   const orig_lat = orig.json.results[0].geometry.location.lat;
   const orig_lng = orig.json.results[0].geometry.location.lng;
-  let hexGrid;
+  let hexGrid = [];
   try {
     hexGrid = await hexGen(orig_lat, orig_lng);
-    // console.log(hexGrid)
+    console.log(hexGrid)
   } catch (error) {
     res.json(error);
   }
@@ -78,7 +71,7 @@ app.get('/lens/', async function (req, res) {
   let testForWater = hexGrid.map((loc, index) => { return { lat: loc[0], lng: loc[1] } });
   testForWater = await googleMapsClient.elevation({ locations: testForWater }).asPromise();
   let notWater = testForWater.json.results.filter(location => { return location.elevation > 5 });
-  hexGrid = notWater.map(loc => { return { lat: loc.location.lat, lng: loc.location.lng } });
+  hexGrid = (notWater.map(loc => { return { lat: loc.location.lat, lng: loc.location.lng } }))
 
   // TURN LAT LNGS INTO GOOGLE PLACE IDS
   let placeID_Queries = hexGrid.map(loc => {
@@ -86,13 +79,11 @@ app.get('/lens/', async function (req, res) {
   });
   let reverseGeocodeRes = await Promise.all(placeID_Queries);
   let placeIDs = reverseGeocodeRes.map(entry => { return entry.json.results[0].place_id; });
-  // console.log(placeIDs);
 
   // CALL UBER API ON ALL PLACE IDS
   let uberReqURL = 'https://www.uber.com/api/fare-estimate?pickupRef=' + placeIDs[0] + '&destinationRef=';
-  // let uberFares = placeIDs.map( id => { await axios.get(uberReqURL + id)})
   let uberFareReqs = [];
-  for (let i = 1; i < placeIDs.length; i++) {
+  for (let i = 1; i < placeIDs.length; i++) {                   // skip first placeID (origin)
     uberFareReqs.push(axios.get(uberReqURL + placeIDs[i]));
   }
 
@@ -103,26 +94,17 @@ app.get('/lens/', async function (req, res) {
     uberFares.push(uberFareRes[i].data);
   }
 
-  // Get only UberX
-  uberFares = uberFares.map(fareData => {
+  // Get only UberX, and create fareData objects key'd by latlng and placeID
+  uberFares = uberFares.map((fareData, index) => {
     for (let i = 0; i < fareData.prices.length; i++) {
       if (fareData.prices[i].vehicleViewDisplayName == 'uberX') {
-        console.log('hola');
-        return fareData.prices[i];
+        return { latlng: hexGrid[index], placeID: placeIDs[index], fareData: [fareData.prices[i]] };
       }
     }
   });
+
   console.log(uberFares);
-  // let minFare = 99999;
-  // for (let i = 0; i < uberFares)
-
-  // CREATE MASTER FARE OBJECT WITH LAT,LNG's
-  // let latlng_fareObj = hexGrid.map( (point, index) => {})
-  // uberFares = uberFares.map(res => console.log(res.res));
   res.json(uberFares)
-
-
-
 });
 
 
