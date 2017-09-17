@@ -57,7 +57,13 @@ app.get('/lens/', async function (req, res) {
 
   // Geocode an origin and destination
   console.log(new Date(), 'geocoding orig and dest');
-  orig = await googleMapsClient.geocode({ address: orig }).asPromise();
+  try {
+    orig = await googleMapsClient.geocode({ address: orig }).asPromise();
+  } catch (error) {
+    console.log(error);
+    res.send(error);
+    return;
+  }
   // console.log(orig.json.results[0].geometry.location);
   dest = await googleMapsClient.geocode({ address: dest }).asPromise();
   // console.log(dest.json.results);
@@ -96,7 +102,7 @@ app.get('/lens/', async function (req, res) {
   let uberReqURL = 'https://www.uber.com/api/fare-estimate?pickupRef=' + placeIDs[0] + '&destinationRef=';
   let uberFareReqs = [];
   console.log(new Date(), 'getting fares');
-  for (let i = 1; i < placeIDs.length; i++) {                   // skip first placeID (origin)
+  for (let i = 0; i < placeIDs.length; i++) {
     uberFareReqs.push(axios.get(uberReqURL + placeIDs[i]));
   }
 
@@ -116,10 +122,25 @@ app.get('/lens/', async function (req, res) {
   uberFares = uberFares.map((fareData, index) => {
     for (let i = 0; i < fareData.prices.length; i++) {
       if (fareData.prices[i].vehicleViewDisplayName == 'uberX') {
-        return { latlng: hexGrid[index], placeID: placeIDs[index], fareData: [fareData.prices[i]] };
+        return { latlng: hexGrid[index], placeID: placeIDs[index], fareData: fareData.prices[i] };
       }
     }
   });
+
+  // Get min fare for client convenience
+  let minFare = 99999; let minIdx = 0;
+  for (i = 0; i < uberFares.length; i++) {
+    let fareString = uberFares[i].fareData.fareString;
+    let a = toFloat(fareString.split('-')[0].slice(1));
+    let b = toFloat(fareString.split('-')[1]);
+    console.log(a,b);
+    let avg = (a + b) / 2.0;
+    if (avg < minFare) {
+      minFare = avg;
+      minIdx = i;
+    }
+  }
+  uberFares['minFare'] = uberFares[minIdx].fareData;
 
   // console.log(uberFares);
   res.json(uberFares)

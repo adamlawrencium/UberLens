@@ -1,11 +1,5 @@
 var PythonShell = require('python-shell');
 
-// let lat = 47.641387;
-// let lng = -122.132817;
-// let depth = 3;
-// let major = 200;
-
-
 module.exports = function (lat, lng, walkpref) {
     let pref;
     if (walkpref == 5) {pref = 4}

@@ -12,21 +12,21 @@ block content
         form
           .form-group
             label(for='autocompleteorigin') Where you at
-            input#autocompleteorigin(type='text', placeholder='e.g. 1999 Burdett Ave, Troy NY, 12180' value="Microsoft Studio F, 148th Avenue Northeast, Redmond, WA, United States")
+            input#autocompleteorigin(type='text', placeholder='e.g. 1999 Burdett Ave, Troy NY, 12180' value="Microsoft Studio F, 148th Avenue Northeast, Redmond, WA, United States", required="true")
           .form-group
             label(for='autocompletedestination') Where you're goin
-            input#autocompletedestination(type='text', placeholder='e.g. Molly Moon\'s Ice Cream')
+            input#autocompletedestination(type='text', placeholder='e.g. Molly Moon\'s Ice Cream' value="917 E Pine St, Seattle, WA 98122" required="true")
           .form-group
             label(for='walkPref') How far are you willing to walk to your destination from your Uber drop off?
             br
             label.radio-inline
-              input#inlineRadio1(type='radio', name='inlineRadioOptions', value='option1')
+              input#inlineRadio1(type='radio', name='walkprefs', value='5')
               |  5 minutes
             label.radio-inline
-              input#inlineRadio2(type='radio', name='inlineRadioOptions', value='option2')
+              input#inlineRadio2(type='radio', name='walkprefs', value='10')
               |  10 minutes
             label.radio-inline
-              input#inlineRadio3(type='radio', name='inlineRadioOptions', value='option3')
+              input#inlineRadio3(type='radio', name='walkprefs', value='15')
               |  15 minutes
 
           button.btn.btn-primary#submitbutton(type='button') Save $$$'s
