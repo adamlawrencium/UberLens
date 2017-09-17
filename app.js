@@ -55,82 +55,74 @@ app.get('/lens/', async function (req, res) {
 
   // Geocode an origin and destination
   let orig = await googleMapsClient.geocode({ address: studio_D }).asPromise();
-  // console.log(orig.json.results);
+  // console.log(orig.json.results[0].geometry.location);
   let dest = await googleMapsClient.geocode({ address: molly_moons }).asPromise();
   // console.log(dest.json.results);
-  console.log();
+  // console.log();
 
+  let r = await googleMapsClient.reverseGeocode({ place_id: 'ChIJWZYFhG1tkFQRHqN9zKkOIS0' }).asPromise();
+  // console.log(r.json.results);
 
   // GENERATE HEX GRID (inputs: destination latlng)
+  const orig_lat = orig.json.results[0].geometry.location.lat;
+  const orig_lng = orig.json.results[0].geometry.location.lng;
   let hexGrid;
   try {
-    hexGrid = await hexGen();
+    hexGrid = await hexGen(orig_lat, orig_lng);
+    // console.log(hexGrid)
   } catch (error) {
     res.json(error);
   }
 
-  // FILTER OUT POINTS IN WATER
-  let testForWater = hexGrid.map( (loc, index) => { return {lat: loc[0], lng: loc[1]} });
-  testForWater = await googleMapsClient.elevation({locations:testForWater}).asPromise();
-  let notWater = testForWater.json.results.filter( location => { return location.elevation > 5 });
-  hexGrid = notWater.map( loc => { return {lat: loc.location.lat, lng: loc.location.lng}});
+  // FILTER OUT LAT,LNG IN WATER
+  let testForWater = hexGrid.map((loc, index) => { return { lat: loc[0], lng: loc[1] } });
+  testForWater = await googleMapsClient.elevation({ locations: testForWater }).asPromise();
+  let notWater = testForWater.json.results.filter(location => { return location.elevation > 5 });
+  hexGrid = notWater.map(loc => { return { lat: loc.location.lat, lng: loc.location.lng } });
 
   // TURN LAT LNGS INTO GOOGLE PLACE IDS
-  let placeID_Queries = hexGrid.map( loc => {
+  let placeID_Queries = hexGrid.map(loc => {
     return googleMapsClient.reverseGeocode({ latlng: [loc.lat, loc.lng] }).asPromise();
   });
   let reverseGeocodeRes = await Promise.all(placeID_Queries);
-  let placeIDs = reverseGeocodeRes.map( entry => { return entry.json.results[0].place_id; });
-  console.log(placeIDs);
+  let placeIDs = reverseGeocodeRes.map(entry => { return entry.json.results[0].place_id; });
+  // console.log(placeIDs);
 
   // CALL UBER API ON ALL PLACE IDS
-  const UberFareEstimatorURL = "https://www.uber.com/api/fare-estimate?"
-  let req_url = UberFareEstimatorURL + 'pickupRef=' + 'ChIJA4u3rXNtkFQRwXQnyYO1fCA' + '&destinationRef=' + 'ChIJ-T_C8W5tkFQRMHAHnllVKqc'
-  console.log(req_url)
-  axios.get(req_url)
-    .then(response => {
-      console.log(response.data);
-    })
-    .catch(error => {
-      console.log(error);
-    });
-  
-  /*
-      """
-    Wrapper for address-lookup api endpoint
-    """
-    def __init__(self):
-        self.url_AL = "https://www.uber.com/api/address-lookup?lat="
-        self.url_FE = "https://www.uber.com/api/fare-estimate?"
+  let uberReqURL = 'https://www.uber.com/api/fare-estimate?pickupRef=' + placeIDs[0] + '&destinationRef=';
+  // let uberFares = placeIDs.map( id => { await axios.get(uberReqURL + id)})
+  let uberFareReqs = [];
+  for (let i = 1; i < placeIDs.length; i++) {
+    uberFareReqs.push(axios.get(uberReqURL + placeIDs[i]));
+  }
 
-    def address_lookup(self, lat, lng):
-        req = requests.get(self.url_AL + str(lat) + "&lng=" + str(lng))
-        return req.json()
+  // Parse Uber response
+  uberFareRes = await Promise.all(uberFareReqs);
+  let uberFares = []
+  for (let i = 0; i < uberFareRes.length; i++) {
+    uberFares.push(uberFareRes[i].data);
+  }
 
-    def fare_estimator(self, pickupID, destID):
-        fares = []
-        req = self.url_FE + 'pickupRef=' + pickupID + '&destinationRef=' + destID
-        req = requests.get(req)
-        return req.json()
+  // Get only UberX
+  uberFares = uberFares.map(fareData => {
+    for (let i = 0; i < fareData.prices.length; i++) {
+      if (fareData.prices[i].vehicleViewDisplayName == 'uberX') {
+        console.log('hola');
+        return fareData.prices[i];
+      }
+    }
+  });
+  console.log(uberFares);
+  // let minFare = 99999;
+  // for (let i = 0; i < uberFares)
 
-    def get_UberX_from_fares(self, blob):
+  // CREATE MASTER FARE OBJECT WITH LAT,LNG's
+  // let latlng_fareObj = hexGrid.map( (point, index) => {})
+  // uberFares = uberFares.map(res => console.log(res.res));
+  res.json(uberFares)
 
-        fares = blob['prices']
-        for vehicle in fares:
-            if vehicle['vehicleViewDisplayName'] == 'uberX':
-                return vehicle['fareString']
 
-        return 'PRICE NOT FOUND'
-*/
-  
-  // axios.get('https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY')
-  //   .then(response => {
-  //     console.log(response.data.url);
-  //     console.log(response.data.explanation);
-  //   })
-  //   .catch(error => {
-  //     console.log(error);
-  //   });
+
 });
 
 
