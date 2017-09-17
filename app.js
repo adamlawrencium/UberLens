@@ -128,19 +128,19 @@ app.get('/lens/', async function (req, res) {
   });
 
   // Get min fare for client convenience
-  let minFare = 99999; let minIdx = 0;
-  for (i = 0; i < uberFares.length; i++) {
-    let fareString = uberFares[i].fareData.fareString;
-    let a = toFloat(fareString.split('-')[0].slice(1));
-    let b = toFloat(fareString.split('-')[1]);
-    console.log(a,b);
-    let avg = (a + b) / 2.0;
-    if (avg < minFare) {
-      minFare = avg;
-      minIdx = i;
-    }
-  }
-  uberFares['minFare'] = uberFares[minIdx].fareData;
+  // let minFare = 99999; let minIdx = 0;
+  // for (i = 0; i < uberFares.length; i++) {
+  //   let fareString = uberFares[i].fareData.fareString;
+  //   let a = toFloat(fareString.split('-')[0].slice(1));
+  //   let b = toFloat(fareString.split('-')[1]);
+  //   console.log(a,b);
+  //   let avg = (a + b) / 2.0;
+  //   if (avg < minFare) {
+  //     minFare = avg;
+  //     minIdx = i;
+  //   }
+  // }
+  // uberFares['minFare'] = uberFares[minIdx].fareData;
 
   // console.log(uberFares);
   res.json(uberFares)
