@@ -37,10 +37,10 @@ app.get('/lens/', async function (req, res) {
   let orig = req.query.orig;
   let dest = req.query.dest;
   let walkpref = req.query.walkpref;
-  if ((orig == 'undefined' || dest == '' || walkpref == '')) {
+  if ((orig == '' || dest == '' || walkpref == 'undefined')) {
     console.log(new Date(), 'ERROR: Not all params provided');
     console.log(new Date(), orig, dest, walkpref)
-    res.json({'blah': 'Please include origin, destination, and walk preference'});
+    res.json('Please include origin, destination, and walk preference');
     return;
   }
   console.log(new Date(), orig, dest, walkpref)
@@ -146,7 +146,12 @@ app.get('/lens/', async function (req, res) {
       minIdx = i;
     }
   }
-  let minFareObj = { 
+  // console.log(uberFares[minIdx]);
+  let minFareAddr = await googleMapsClient.reverseGeocode({ latlng: [uberFares[minIdx].latlng.lat, uberFares[minIdx].latlng.lng] }).asPromise();
+  minFareAddr = minFareAddr.json.results[0].formatted_address;
+  console.log(minFareAddr);
+  let minFareObj = {
+    addr: minFareAddr,
     latlng: uberFares[minIdx].latlng, 
     placeID: uberFares[minIdx].placeID, 
     fareData: uberFares[minIdx].fareData
@@ -154,7 +159,7 @@ app.get('/lens/', async function (req, res) {
   let uberFaresRes = {};
   uberFaresRes['minFare'] = minFareObj;
   uberFaresRes['uberFares'] = uberFares;
-  console.log(uberFaresRes);
+  // console.log(uberFaresRes);
   res.json(uberFaresRes)
 });
 
