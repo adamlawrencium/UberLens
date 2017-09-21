@@ -2,8 +2,8 @@ var PythonShell = require('python-shell');
 
 module.exports = function (lat, lng, walkpref) {
     let pref;
-    if (walkpref == 5) {pref = 4}
-    else if (walkpref == 10) {pref = 6}
+    if (walkpref == 5) {pref = 2}
+    else if (walkpref == 10) {pref = 5}
     else if (walkpref == 15) {pref = 8}
     else throw new Error();
 

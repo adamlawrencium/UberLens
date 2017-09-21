@@ -11,6 +11,11 @@ const axios = require('axios');
 var index = require('./routes/index');
 var users = require('./routes/users');
 
+process.on('unhandledRejection', (reason, p) => {
+  console.log('Unhandled Rejection at: Promise', p, 'reason:', reason);
+  // application specific logging, throwing an error, or other logic here
+});
+
 var app = express();
 
 // view engine setup
@@ -32,9 +37,10 @@ app.get('/lens/', async function (req, res) {
   let orig = req.query.orig;
   let dest = req.query.dest;
   let walkpref = req.query.walkpref;
-  if (!(orig && dest && walkpref)) {
-    res.send('Please include origin, destination, and walk preference');
-    console.log(new Date(), 'Not all params provided');
+  if ((orig == 'undefined' || dest == '' || walkpref == '')) {
+    console.log(new Date(), 'ERROR: Not all params provided');
+    console.log(new Date(), orig, dest, walkpref)
+    res.json({'blah': 'Please include origin, destination, and walk preference'});
     return;
   }
   console.log(new Date(), orig, dest, walkpref)
@@ -128,22 +134,28 @@ app.get('/lens/', async function (req, res) {
   });
 
   // Get min fare for client convenience
-  // let minFare = 99999; let minIdx = 0;
-  // for (i = 0; i < uberFares.length; i++) {
-  //   let fareString = uberFares[i].fareData.fareString;
-  //   let a = toFloat(fareString.split('-')[0].slice(1));
-  //   let b = toFloat(fareString.split('-')[1]);
-  //   console.log(a,b);
-  //   let avg = (a + b) / 2.0;
-  //   if (avg < minFare) {
-  //     minFare = avg;
-  //     minIdx = i;
-  //   }
-  // }
-  // uberFares['minFare'] = uberFares[minIdx].fareData;
-
-  // console.log(uberFares);
-  res.json(uberFares)
+  let minFare = 99999; let minIdx = 0;
+  for (i = 0; i < uberFares.length; i++) {
+    let fareString = uberFares[i].fareData.fareString;
+    let a = parseFloat(fareString.split('-')[0].slice(1));
+    let b = parseFloat(fareString.split('-')[1]);
+    console.log(a,b);
+    let avg = (a + b) / 2.0;
+    if (avg < minFare) {
+      minFare = avg;
+      minIdx = i;
+    }
+  }
+  let minFareObj = { 
+    latlng: uberFares[minIdx].latlng, 
+    placeID: uberFares[minIdx].placeID, 
+    fareData: uberFares[minIdx].fareData
+  };
+  let uberFaresRes = {};
+  uberFaresRes['minFare'] = minFareObj;
+  uberFaresRes['uberFares'] = uberFares;
+  console.log(uberFaresRes);
+  res.json(uberFaresRes)
 });
 
 

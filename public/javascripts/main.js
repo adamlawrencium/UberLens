@@ -96,17 +96,17 @@ $(document).ready(function () {
         const orig = $('#autocompleteorigin').val();
         const dest = $('#autocompletedestination').val();
         const walkpref = $("input[name=walkprefs]:checked").val();
-        console.log(orig);
-        console.log(dest);
-        console.log(walkpref);
+        // console.log(orig);
+        // console.log(dest);
+        // console.log(walkpref);
         $.getJSON(`/lens?orig=${orig}&dest=${dest}&walkpref=${walkpref}`, (data) => {
             $('#mySpinner').removeClass('spinner');
             console.log(data);
-            const minAddr = data['lowestFare'][0]
-            const minFare = data['lowestFare'][1]
-            $(".jumbotron").append( `<p2>Found a cheaper destination!:</p2> <p>For $${minFare}, ${minAddr}</p>` );
+            // const minAddr = data['lowestFare'][0]
+            // const minFare = data['lowestFare'][1]
+            // $(".jumbotron").append( `<p2>Found a cheaper destination!:</p2> <p>For $${minFare}, ${minAddr}</p>` );
         })
-    })
+    });
 
 
     // $('.btn').on('click', function () {
