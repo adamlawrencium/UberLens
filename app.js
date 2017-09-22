@@ -72,7 +72,7 @@ app.get('/lens/', async function (req, res) {
   }
   // console.log(orig.json.results[0].geometry.location);
   dest = await googleMapsClient.geocode({ address: dest }).asPromise();
-  console.log(dest.json.results[0].geometry.location.lat);
+  // console.log(dest.json.results[0].geometry.location.lat);
   console.log(new Date(), 'geocoding orig and dest [DONE]');
   // GENERATE HEX GRID (inputs: destination latlng)
   const dest_lat = dest.json.results[0].geometry.location.lat;
@@ -83,10 +83,10 @@ app.get('/lens/', async function (req, res) {
     console.log(new Date(), 'generating hex grid');
     hexGrid = await hexGen(dest_lat, dest_lng, walkpref);
     console.log(new Date(), 'generating hex grid [DONE]', hexGrid.length);
-    console.log(hexGrid)
-    for (let i = 0; i < hexGrid.length; i++) {
-      console.log(`${hexGrid[i][0]},${hexGrid[i][1]}`)
-    }
+    // console.log(hexGrid)
+    // for (let i = 0; i < hexGrid.length; i++) {
+    //   console.log(`${hexGrid[i][0]},${hexGrid[i][1]}`)
+    // }
   } catch (error) {
     res.json(error);
   }
@@ -166,7 +166,7 @@ app.get('/lens/', async function (req, res) {
   uberFaresRes['uberFares'] = uberFares;
   
   let originalFareAddr = await googleMapsClient.reverseGeocode({ latlng: [uberFares[0].latlng.lat, uberFares[0].latlng.lng] }).asPromise();
-  console.log(uberFaresRes['uberFares'][0].fareData.fareString);
+  // console.log(uberFaresRes['uberFares'][0].fareData.fareString);
   let origFare = uberFaresRes['uberFares'][0].fareData.fareString;
   uberFaresRes['originalFare'] = origFare;
   
