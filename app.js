@@ -72,17 +72,21 @@ app.get('/lens/', async function (req, res) {
   }
   // console.log(orig.json.results[0].geometry.location);
   dest = await googleMapsClient.geocode({ address: dest }).asPromise();
-  // console.log(dest.json.results);
+  console.log(dest.json.results[0].geometry.location.lat);
   console.log(new Date(), 'geocoding orig and dest [DONE]');
   // GENERATE HEX GRID (inputs: destination latlng)
-  const orig_lat = orig.json.results[0].geometry.location.lat;
-  const orig_lng = orig.json.results[0].geometry.location.lng;
+  const dest_lat = dest.json.results[0].geometry.location.lat;
+  const dest_lng = dest.json.results[0].geometry.location.lng;
+  const orig_placeID = orig.json.results[0].place_id;
   let hexGrid = [];
   try {
     console.log(new Date(), 'generating hex grid');
-    hexGrid = await hexGen(orig_lat, orig_lng, walkpref);
+    hexGrid = await hexGen(dest_lat, dest_lng, walkpref);
     console.log(new Date(), 'generating hex grid [DONE]', hexGrid.length);
-    // console.log(hexGrid)
+    console.log(hexGrid)
+    for (let i = 0; i < hexGrid.length; i++) {
+      console.log(`${hexGrid[i][0]},${hexGrid[i][1]}`)
+    }
   } catch (error) {
     res.json(error);
   }
@@ -105,7 +109,7 @@ app.get('/lens/', async function (req, res) {
   let placeIDs = reverseGeocodeRes.map(entry => { return entry.json.results[0].place_id; });
 
   // CALL UBER API ON ALL PLACE IDS
-  let uberReqURL = 'https://www.uber.com/api/fare-estimate?pickupRef=' + placeIDs[0] + '&destinationRef=';
+  let uberReqURL = 'https://www.uber.com/api/fare-estimate?pickupRef=' + orig_placeID  + '&destinationRef=';
   let uberFareReqs = [];
   console.log(new Date(), 'getting fares');
   for (let i = 0; i < placeIDs.length; i++) {
@@ -146,20 +150,26 @@ app.get('/lens/', async function (req, res) {
       minIdx = i;
     }
   }
-  // console.log(uberFares[minIdx]);
+  
   let minFareAddr = await googleMapsClient.reverseGeocode({ latlng: [uberFares[minIdx].latlng.lat, uberFares[minIdx].latlng.lng] }).asPromise();
   minFareAddr = minFareAddr.json.results[0].formatted_address;
-  console.log(minFareAddr);
+  
   let minFareObj = {
     addr: minFareAddr,
     latlng: uberFares[minIdx].latlng, 
     placeID: uberFares[minIdx].placeID, 
     fareData: uberFares[minIdx].fareData
   };
+  
   let uberFaresRes = {};
   uberFaresRes['minFare'] = minFareObj;
   uberFaresRes['uberFares'] = uberFares;
-  // console.log(uberFaresRes);
+  
+  let originalFareAddr = await googleMapsClient.reverseGeocode({ latlng: [uberFares[0].latlng.lat, uberFares[0].latlng.lng] }).asPromise();
+  console.log(uberFaresRes['uberFares'][0].fareData.fareString);
+  let origFare = uberFaresRes['uberFares'][0].fareData.fareString;
+  uberFaresRes['originalFare'] = origFare;
+  
   res.json(uberFaresRes)
 });
 

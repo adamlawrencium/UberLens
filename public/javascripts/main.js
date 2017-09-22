@@ -92,30 +92,22 @@ $(document).ready(function () {
     $('#mySpinner').removeClass('spinner');
     google.maps.event.addDomListener(window, 'load', initAutocomplete);
     $('#submitbutton').click(() => {
-        $('#mySpinner').addClass('spinner');
+        $('#results').remove();
+        $('#submitbutton').html($('#submitbutton').html() + " | Loading...");
         const orig = $('#autocompleteorigin').val();
         const dest = $('#autocompletedestination').val();
         const walkpref = $("input[name=walkprefs]:checked").val();
-        // console.log(orig);
-        // console.log(dest);
-        // console.log(walkpref);
         $.getJSON(`/lens?orig=${orig}&dest=${dest}&walkpref=${walkpref}`, (data) => {
-            $('#mySpinner').removeClass('spinner');
+            $('#submitbutton').html("💰 Save 💰");
             console.log(data);
-            // const minAddr = data['lowestFare'][0]
-            // const minFare = data['lowestFare'][1]
-            // $(".jumbotron").append( `<p2>Found a cheaper destination!:</p2> <p>For $${minFare}, ${minAddr}</p>` );
-        })
+            const minAddr = data['minFare'].addr;
+            const minFare = data['minFare'].fareData.fareString;
+            const originalFare = data['originalFare'];
+            $(".jumbotron").append(
+                `<div id=results><p>Found a cheaper destination!:</p>
+                 <p>For <strong>${minFare}</strong>
+                 to <strong>${minAddr}</strong></p>
+                 <p>Original fare: ${originalFare}</p></div>`);
+        });
     });
-
-
-    // $('.btn').on('click', function () {
-    //     var $this = $(this);
-    //     $this.button('loading');
-    //     setTimeout(function () {
-    //         $this.button('reset');
-    //     }, 8000);
-    // });
-
-
-})
+});
