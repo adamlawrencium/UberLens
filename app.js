@@ -125,7 +125,8 @@ app.get('/lens/', async function (req, res) {
       uberFares.push(uberFareRes[i].data);
     }
   } catch (error) {
-    throw new Error(error);
+    console.log(error);
+    return;
   }
 
   // Get only UberX, and create fareData objects key'd by latlng and placeID
