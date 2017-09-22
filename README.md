@@ -2,9 +2,13 @@
     <img src="https://user-images.githubusercontent.com/10917080/30120320-7c6aa6b4-92f6-11e7-9949-5479fa241969.png" width=600/>
 </p>
 
-
 # UberLens - visualize Uber fare rates in your area
-From an origin to a destination:
+
+<p align="center">
+    <img width="707" alt="screen shot 2017-09-22 at 1 56 52 am" src="https://user-images.githubusercontent.com/10917080/30731112-617f2d9e-9f39-11e7-8228-2474d9dfa9c4.png">
+</p>
+
+Using the standalone python script, you can create your own visualization:
 ![blah](https://raw.githubusercontent.com/adamalawrence/UberLens/master/Screen%20Shot%202017-06-29%20at%2012.46.16%20AM.png)
 Fares surrounding a certain location (first attempt at visualizing fares):
 ![hmm check the repo for the pic](https://raw.githubusercontent.com/adamalawrence/UberLens/master/Screen%20Shot%202017-06-27%20at%2012.39.10%20AM.png)
